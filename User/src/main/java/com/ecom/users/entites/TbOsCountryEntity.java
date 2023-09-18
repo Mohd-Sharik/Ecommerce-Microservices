@@ -13,7 +13,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "TB_OS_COUNTRY")
-public class TbOsCountry implements Serializable{
+public class TbOsCountryEntity implements Serializable{
 	
 	
 	

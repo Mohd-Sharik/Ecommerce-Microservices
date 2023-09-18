@@ -15,25 +15,25 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "TB_OS_CITY")
-public class TbOsCity implements Serializable {
-	
-	
-	
-	/**@author Mohd Sharik
+@Table(name = "TB_OS_DELE")
+public class TbOsDelegEntity  implements Serializable{
+
+	/**
 	 * 
+	 * @author Mohd Sharik
 	 */
 	private static final long serialVersionUID = 1L;
-
+	
+	
 	@Id
 	@Column(name = "ID")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_OS_CITY_GEN")
-	@SequenceGenerator(name = "SEQ_OS_CITY_GEN", sequenceName = "SEQ_OS_CITY", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_OS_DELE_GEN")
+	@SequenceGenerator(name = "SEQ_OS_DELE_GEN", sequenceName = "SEQ_OS_DELE", allocationSize = 1)
 	private Long id;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "STATE_ID")
-	private TbOsState tbOsState;
+	@JoinColumn(name = "CITY_ID")
+	private TbOsCityEntity tbOsCity;
 	
 	@Column(name = "CD")
 	private String cd;
@@ -43,9 +43,9 @@ public class TbOsCity implements Serializable {
 	
 	@Column(name = "UPD_BY")
 	private String updBy;
-	
+
 	@Column(name = "UPD_TS")
-	private Date updTs;
+	Date updTs;
 
 	public Long getId() {
 		return id;
@@ -55,12 +55,12 @@ public class TbOsCity implements Serializable {
 		this.id = id;
 	}
 
-	public TbOsState getTbOsState() {
-		return tbOsState;
+	public TbOsCityEntity getTbOsCity() {
+		return tbOsCity;
 	}
 
-	public void setTbOsState(TbOsState tbOsState) {
-		this.tbOsState = tbOsState;
+	public void setTbOsCity(TbOsCityEntity tbOsCity) {
+		this.tbOsCity = tbOsCity;
 	}
 
 	public String getCd() {
@@ -94,6 +94,9 @@ public class TbOsCity implements Serializable {
 	public void setUpdTs(Date updTs) {
 		this.updTs = updTs;
 	}
+	
+	
+	
 	
 	
 	

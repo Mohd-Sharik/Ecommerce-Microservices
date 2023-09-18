@@ -14,7 +14,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "TB_OS_DB_ERR")
-public class TbOsDbErr  implements Serializable {
+public class TbOsDbErrEntity  implements Serializable {
 
 	/**
 	 *@author Mohd Sharik 

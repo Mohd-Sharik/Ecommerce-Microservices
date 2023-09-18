@@ -16,7 +16,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "TB_OS_POSTAL")
-public class TbOsPostal implements Serializable {
+public class TbOsPostalEntity implements Serializable {
 
 	/**
 	 * @author Mohd Sharik
@@ -32,7 +32,7 @@ public class TbOsPostal implements Serializable {
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "COLONY_ID")
-	private TbOsColony tbOsColony;
+	private TbOsColonyEntity tbOsColony;
 	
 	@Column(name = "CD")
 	private String cd;
@@ -54,11 +54,11 @@ public class TbOsPostal implements Serializable {
 		this.id = id;
 	}
 
-	public TbOsColony getTbOsColony() {
+	public TbOsColonyEntity getTbOsColony() {
 		return tbOsColony;
 	}
 
-	public void setTbOsColony(TbOsColony tbOsColony) {
+	public void setTbOsColony(TbOsColonyEntity tbOsColony) {
 		this.tbOsColony = tbOsColony;
 	}
 

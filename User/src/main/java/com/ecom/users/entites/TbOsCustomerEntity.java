@@ -16,7 +16,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "TB_OS_CUSTMR")
-public class TbOsCustomer implements Serializable{
+public class TbOsCustomerEntity implements Serializable{
 
 	/**
 	 * @author Mhd Sharik
@@ -72,7 +72,7 @@ public class TbOsCustomer implements Serializable{
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ADDRESS_ID")
-	private TbOsAdrss tbOsAdrss;
+	private TbOsAdrssEntity tbOsAdrss;
 	
 	@Column(name = "USER_STATE")
 	private String serState;
@@ -216,11 +216,11 @@ public class TbOsCustomer implements Serializable{
 		this.pswdCrtBy = pswdCrtBy;
 	}
 
-	public TbOsAdrss getTbOsAdrss() {
+	public TbOsAdrssEntity getTbOsAdrss() {
 		return tbOsAdrss;
 	}
 
-	public void setTbOsAdrss(TbOsAdrss tbOsAdrss) {
+	public void setTbOsAdrss(TbOsAdrssEntity tbOsAdrss) {
 		this.tbOsAdrss = tbOsAdrss;
 	}
 

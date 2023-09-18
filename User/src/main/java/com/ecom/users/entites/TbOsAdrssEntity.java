@@ -16,7 +16,7 @@ import javax.persistence.Table;
 
 @Table(name = "TB_OS_ADRS")
 @Entity
-public class TbOsAdrss implements Serializable {
+public class TbOsAdrssEntity implements Serializable {
 
 	/**
 	 * @author Mohd Sharik
@@ -39,29 +39,29 @@ public class TbOsAdrss implements Serializable {
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "COLO_ID")
-	private TbOsColony tbOsColony;
+	private TbOsColonyEntity tbOsColony;
 	
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "DELEG_ID")
-	private TbOsDeleg tbOsDeleg;
+	private TbOsDelegEntity tbOsDeleg;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "CITY_ID")
-	private TbOsCity tbOsCity;
+	private TbOsCityEntity tbOsCity;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "STATE_ID")
-	private TbOsState tbOsState;
+	private TbOsStateEntity tbOsState;
 	
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "COUNTRY_ID")
-	private TbOsCountry tbOsCountry;
+	private TbOsCountryEntity tbOsCountry;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "POSTAL_ID")
-	private TbOsPostal tbOsPostal;
+	private TbOsPostalEntity tbOsPostal;
 	
 	@Column(name = "ADDR_TYPE")
 	private String addrType;
@@ -102,51 +102,51 @@ public class TbOsAdrss implements Serializable {
 		this.streeNo = streeNo;
 	}
 
-	public TbOsColony getTbOsColony() {
+	public TbOsColonyEntity getTbOsColony() {
 		return tbOsColony;
 	}
 
-	public void setTbOsColony(TbOsColony tbOsColony) {
+	public void setTbOsColony(TbOsColonyEntity tbOsColony) {
 		this.tbOsColony = tbOsColony;
 	}
 
-	public TbOsDeleg getTbOsDeleg() {
+	public TbOsDelegEntity getTbOsDeleg() {
 		return tbOsDeleg;
 	}
 
-	public void setTbOsDeleg(TbOsDeleg tbOsDeleg) {
+	public void setTbOsDeleg(TbOsDelegEntity tbOsDeleg) {
 		this.tbOsDeleg = tbOsDeleg;
 	}
 
-	public TbOsCity getTbOsCity() {
+	public TbOsCityEntity getTbOsCity() {
 		return tbOsCity;
 	}
 
-	public void setTbOsCity(TbOsCity tbOsCity) {
+	public void setTbOsCity(TbOsCityEntity tbOsCity) {
 		this.tbOsCity = tbOsCity;
 	}
 
-	public TbOsState getTbOsState() {
+	public TbOsStateEntity getTbOsState() {
 		return tbOsState;
 	}
 
-	public void setTbOsState(TbOsState tbOsState) {
+	public void setTbOsState(TbOsStateEntity tbOsState) {
 		this.tbOsState = tbOsState;
 	}
 
-	public TbOsCountry getTbOsCountry() {
+	public TbOsCountryEntity getTbOsCountry() {
 		return tbOsCountry;
 	}
 
-	public void setTbOsCountry(TbOsCountry tbOsCountry) {
+	public void setTbOsCountry(TbOsCountryEntity tbOsCountry) {
 		this.tbOsCountry = tbOsCountry;
 	}
 
-	public TbOsPostal getTbOsPostal() {
+	public TbOsPostalEntity getTbOsPostal() {
 		return tbOsPostal;
 	}
 
-	public void setTbOsPostal(TbOsPostal tbOsPostal) {
+	public void setTbOsPostal(TbOsPostalEntity tbOsPostal) {
 		this.tbOsPostal = tbOsPostal;
 	}
 

@@ -15,24 +15,23 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "TB_OS_COLONY")
-public class TbOsColony implements Serializable{
-
+@Table(name = "TB_OS_STATE")
+public class TbOsStateEntity  implements Serializable{
+	
+	
 	/**
 	 * @author Mohd Sharik
 	 */
 	private static final long serialVersionUID = 1L;
-	
-	
 	@Id
 	@Column(name = "ID")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_OS_COLONY_GEN")
-	@SequenceGenerator(name = "SEQ_OS_COLONY_GEN", sequenceName = "SEQ_OS_COLONY", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE , generator = "SEQ_OS_STATE_GEN")
+	@SequenceGenerator(name = "SEQ_OS_STATE_GEN" , sequenceName = "SEQ_OS_STATE", allocationSize = 1)
 	private Long id;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "DELEG_ID")
-	private TbOsDeleg tbOsDeleg;
+	@JoinColumn(name = "COUNTRY_ID")
+	private TbOsCountryEntity tbOsCountry;
 	
 	@Column(name = "CD")
 	private String cd;
@@ -54,12 +53,12 @@ public class TbOsColony implements Serializable{
 		this.id = id;
 	}
 
-	public TbOsDeleg getTbOsDeleg() {
-		return tbOsDeleg;
+	public TbOsCountryEntity getTbOsCountry() {
+		return tbOsCountry;
 	}
 
-	public void setTbOsDeleg(TbOsDeleg tbOsDeleg) {
-		this.tbOsDeleg = tbOsDeleg;
+	public void setTbOsCountry(TbOsCountryEntity tbOsCountry) {
+		this.tbOsCountry = tbOsCountry;
 	}
 
 	public String getCd() {
@@ -93,9 +92,6 @@ public class TbOsColony implements Serializable{
 	public void setUpdTs(Date updTs) {
 		this.updTs = updTs;
 	}
-	
-	
-	
 	
 	
 	
