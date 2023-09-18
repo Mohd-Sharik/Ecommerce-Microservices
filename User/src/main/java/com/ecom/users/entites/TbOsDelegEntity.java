@@ -45,7 +45,7 @@ public class TbOsDelegEntity  implements Serializable{
 	private String updBy;
 
 	@Column(name = "UPD_TS")
-	Date updTs;
+	private Date updTs;
 
 	public Long getId() {
 		return id;
