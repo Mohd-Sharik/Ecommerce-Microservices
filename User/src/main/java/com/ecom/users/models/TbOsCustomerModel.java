@@ -2,6 +2,7 @@ package com.ecom.users.models;
 
 import java.util.Date;
 
+import org.apache.commons.lang.StringUtils;
 
 import com.ecom.users.entites.TbOsAdrssEntity;
 
@@ -223,7 +224,37 @@ public class TbOsCustomerModel {
 	
 	
 	
-	
+	public String validate()
+	{
+		StringBuilder sb = new StringBuilder();
+		
+		boolean flag = StringUtils.isBlank(refId);
+		
+		if(flag)
+		{
+			sb.append("Customer refId is Blan : "+refId);
+		}
+		
+		flag = StringUtils.isBlank(pswd);
+		if(flag)
+		{
+			sb.append("Customer pswd is Blank : "+pswd);
+		}
+		
+		flag = StringUtils.isBlank(fullName);
+		if(flag)
+		{
+			sb.append("Customer fullName is Blank : "+fullName);
+		}
+		
+		flag = StringUtils.isBlank(dislayName);
+		if(flag)
+		{
+			sb.append("Customer dislayName is Blank : "+dislayName);
+		}
+		
+		return sb.toString();
+	}
 
 
 }

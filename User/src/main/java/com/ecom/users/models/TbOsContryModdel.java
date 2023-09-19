@@ -2,6 +2,8 @@ package com.ecom.users.models;
 
 import java.util.Date;
 
+import org.apache.commons.lang.StringUtils;
+
 
 public class TbOsContryModdel {
 	
@@ -66,6 +68,31 @@ public class TbOsContryModdel {
 	}
 	
 	
+	public String validate()
+	{
+		StringBuilder sb = new StringBuilder();
+		
+		boolean flag = StringUtils.isBlank(name);
+		if(flag)
+		{
+			sb.append("Country Name is Blank : "+flag);
+		}
+		
+		flag = StringUtils.isBlank(alphaCd2);
+		if(flag)
+		{
+			sb.append("Contry alphaCd2 Is Blank : "+flag);
+		}
+		
+		flag = StringUtils.isBlank(alphaCd3);
+		if(flag)
+		{
+			sb.append("Country alphaCd3 is Blank : "+alphaCd3);
+		}
+		
+		
+		return sb.toString();
+	}
 	
 
 

@@ -2,6 +2,7 @@ package com.ecom.users.models;
 
 import java.util.Date;
 
+import org.apache.commons.lang.StringUtils;
 
 import com.ecom.users.entites.TbOsColonyEntity;
 
@@ -77,6 +78,18 @@ public class TbOsPostalModel {
 	
 	
 
+	public String validate()
+	{
+		StringBuilder sb = new StringBuilder();
+		 boolean flag = StringUtils.isBlank(cd);
+		 
+		 if(flag)
+		 {
+			 sb.append("Postal cd is blank : "+cd);
+		 }
+		 
+		 return sb.toString();
+	}
 
 
 }

@@ -2,6 +2,7 @@ package com.ecom.users.models;
 
 import java.util.Date;
 
+import org.apache.commons.lang.StringUtils;
 
 import com.ecom.users.entites.TbOsCityEntity;
 import com.ecom.users.entites.TbOsColonyEntity;
@@ -129,7 +130,17 @@ public class TbOsAdrsModel {
 	}
 	
 	
-	
+	public String validate()
+	{
+		StringBuilder sb = new StringBuilder();
+		
+		boolean flag = StringUtils.isNotBlank(addrType);
+		if(flag)
+		{
+			sb.append("AddrsType is Blan : "+flag);
+		}
+		return sb.toString();
+	}
 	
 	
 	
