@@ -19,12 +19,13 @@ public class TbOsAdrsModel {
     private Long id;
 	private String houseNo;
 	private String streeNo;
-	private TbOsColonyEntity tbOsColony;
-	private TbOsDelegEntity tbOsDeleg;
-	private TbOsCityEntity tbOsCity;
-	private TbOsStateEntity tbOsState;
-	private TbOsCountryEntity tbOsCountry;
-	private TbOsPostalEntity tbOsPostal;
+	private String colonyName;
+	private String postalName;
+	private String postalCode;
+	private String deleName;
+	private String cityName;
+	private String stateName;
+	private String countryName;
 	private String addrType;
 	private Date crtTs;
 	private String crtBy;
@@ -50,42 +51,7 @@ public class TbOsAdrsModel {
 	public void setStreeNo(String streeNo) {
 		this.streeNo = streeNo;
 	}
-	public TbOsColonyEntity getTbOsColony() {
-		return tbOsColony;
-	}
-	public void setTbOsColony(TbOsColonyEntity tbOsColony) {
-		this.tbOsColony = tbOsColony;
-	}
-	public TbOsDelegEntity getTbOsDeleg() {
-		return tbOsDeleg;
-	}
-	public void setTbOsDeleg(TbOsDelegEntity tbOsDeleg) {
-		this.tbOsDeleg = tbOsDeleg;
-	}
-	public TbOsCityEntity getTbOsCity() {
-		return tbOsCity;
-	}
-	public void setTbOsCity(TbOsCityEntity tbOsCity) {
-		this.tbOsCity = tbOsCity;
-	}
-	public TbOsStateEntity getTbOsState() {
-		return tbOsState;
-	}
-	public void setTbOsState(TbOsStateEntity tbOsState) {
-		this.tbOsState = tbOsState;
-	}
-	public TbOsCountryEntity getTbOsCountry() {
-		return tbOsCountry;
-	}
-	public void setTbOsCountry(TbOsCountryEntity tbOsCountry) {
-		this.tbOsCountry = tbOsCountry;
-	}
-	public TbOsPostalEntity getTbOsPostal() {
-		return tbOsPostal;
-	}
-	public void setTbOsPostal(TbOsPostalEntity tbOsPostal) {
-		this.tbOsPostal = tbOsPostal;
-	}
+	
 	public String getAddrType() {
 		return addrType;
 	}
@@ -130,6 +96,51 @@ public class TbOsAdrsModel {
 	}
 	
 	
+	public String getColonyName() {
+		return colonyName;
+	}
+	public void setColonyName(String colonyName) {
+		this.colonyName = colonyName;
+	}
+	public String getPostalName() {
+		return postalName;
+	}
+	public void setPostalName(String postalName) {
+		this.postalName = postalName;
+	}
+	public String getDeleName() {
+		return deleName;
+	}
+	public void setDeleName(String deleName) {
+		this.deleName = deleName;
+	}
+	public String getCityName() {
+		return cityName;
+	}
+	public void setCityName(String cityName) {
+		this.cityName = cityName;
+	}
+	public String getStateName() {
+		return stateName;
+	}
+	public void setStateName(String stateName) {
+		this.stateName = stateName;
+	}
+	public String getCountryName() {
+		return countryName;
+	}
+	public void setCountryName(String countryName) {
+		this.countryName = countryName;
+	}
+	
+	
+	
+	public String getPostalCode() {
+		return postalCode;
+	}
+	public void setPostalCode(String postalCode) {
+		this.postalCode = postalCode;
+	}
 	public String validate()
 	{
 		StringBuilder sb = new StringBuilder();

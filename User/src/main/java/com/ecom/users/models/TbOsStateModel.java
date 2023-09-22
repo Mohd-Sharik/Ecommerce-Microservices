@@ -9,13 +9,12 @@ public class TbOsStateModel {
 	
 	
 	private Long id;
-	private TbOsCountryEntity tbOsCountry;
 	private String cd;
 	private String nm;
+	private String updTsString;
 	private String updBy;
 	private Date updTs;
-	
-	private String updTsString;
+	private String CountryName;
 
 	public Long getId() {
 		return id;
@@ -25,14 +24,7 @@ public class TbOsStateModel {
 		this.id = id;
 	}
 
-	public TbOsCountryEntity getTbOsCountry() {
-		return tbOsCountry;
-	}
-
-	public void setTbOsCountry(TbOsCountryEntity tbOsCountry) {
-		this.tbOsCountry = tbOsCountry;
-	}
-
+	
 	public String getCd() {
 		return cd;
 	}
@@ -72,9 +64,18 @@ public class TbOsStateModel {
 	public void setUpdTsString(String updTsString) {
 		this.updTsString = updTsString;
 	}
+
+	public String getCountryName() {
+		return CountryName;
+	}
+
+	public void setCountryName(String countryName) {
+		CountryName = countryName;
+	}
 	
 	
 
+	
 	
 	
 

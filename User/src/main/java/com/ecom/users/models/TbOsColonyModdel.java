@@ -10,9 +10,13 @@ public class TbOsColonyModdel {
 	
 	
     private Long id;
-	private TbOsDelegEntity tbOsDeleg;
+	//private TbOsDelegEntity tbOsDeleg;
 	private String cd;
 	private String nm;
+	private String deleName;
+	private String cityName;
+	private String stateName;
+	private String countryName;
 	private String updBy;
 	private Date updTs;
 	private String updTsString;
@@ -22,12 +26,7 @@ public class TbOsColonyModdel {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public TbOsDelegEntity getTbOsDeleg() {
-		return tbOsDeleg;
-	}
-	public void setTbOsDeleg(TbOsDelegEntity tbOsDeleg) {
-		this.tbOsDeleg = tbOsDeleg;
-	}
+
 	public String getCd() {
 		return cd;
 	}
@@ -58,6 +57,31 @@ public class TbOsColonyModdel {
 	public void setUpdTsString(String updTsString) {
 		this.updTsString = updTsString;
 	}
+	public String getDeleName() {
+		return deleName;
+	}
+	public void setDeleName(String deleName) {
+		this.deleName = deleName;
+	}
+	public String getCityName() {
+		return cityName;
+	}
+	public void setCityName(String cityName) {
+		this.cityName = cityName;
+	}
+	public String getStateName() {
+		return stateName;
+	}
+	public void setStateName(String stateName) {
+		this.stateName = stateName;
+	}
+	public String getCountryName() {
+		return countryName;
+	}
+	public void setCountryName(String countryName) {
+		this.countryName = countryName;
+	}
+	
 	
 	
 	

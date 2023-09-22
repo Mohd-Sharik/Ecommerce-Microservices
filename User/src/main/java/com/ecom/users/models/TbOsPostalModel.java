@@ -12,9 +12,14 @@ public class TbOsPostalModel {
 	
 	
 	private Long id;
-	private TbOsColonyEntity tbOsColony;
+	//private TbOsColonyEntity tbOsColony;
 	private String cd;
 	private String nm;
+	private String colonyName;
+	private String deleName;
+	private String cityName;
+	private String stateName;
+	private String countryName;
 	private String updBy;
 	private Date updTs;
 	
@@ -28,13 +33,7 @@ public class TbOsPostalModel {
 		this.id = id;
 	}
 
-	public TbOsColonyEntity getTbOsColony() {
-		return tbOsColony;
-	}
-
-	public void setTbOsColony(TbOsColonyEntity tbOsColony) {
-		this.tbOsColony = tbOsColony;
-	}
+	
 
 	public String getCd() {
 		return cd;
@@ -77,6 +76,49 @@ public class TbOsPostalModel {
 	}
 	
 	
+	
+	
+	
+
+	public String getColonyName() {
+		return colonyName;
+	}
+
+	public void setColonyName(String colonyName) {
+		this.colonyName = colonyName;
+	}
+
+	public String getDeleName() {
+		return deleName;
+	}
+
+	public void setDeleName(String deleName) {
+		this.deleName = deleName;
+	}
+
+	public String getCityName() {
+		return cityName;
+	}
+
+	public void setCityName(String cityName) {
+		this.cityName = cityName;
+	}
+
+	public String getStateName() {
+		return stateName;
+	}
+
+	public void setStateName(String stateName) {
+		this.stateName = stateName;
+	}
+
+	public String getCountryName() {
+		return countryName;
+	}
+
+	public void setCountryName(String countryName) {
+		this.countryName = countryName;
+	}
 
 	public String validate()
 	{

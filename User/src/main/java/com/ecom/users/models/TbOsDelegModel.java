@@ -3,17 +3,18 @@ package com.ecom.users.models;
 import java.util.Date;
 
 
-import com.ecom.users.entites.TbOsCityEntity;
-
 public class TbOsDelegModel {
 	
 	
 	
 	
 	private Long id;
-	private TbOsCityEntity tbOsCity;
+	//private TbOsCityEntity tbOsCity;
 	private String cd;
 	private String nm;
+	private String cityName;
+	private String stateName;
+	private String countryName;
 	private String updBy;
 	private Date updTs;
 	
@@ -27,13 +28,7 @@ public class TbOsDelegModel {
 		this.id = id;
 	}
 
-	public TbOsCityEntity getTbOsCity() {
-		return tbOsCity;
-	}
-
-	public void setTbOsCity(TbOsCityEntity tbOsCity) {
-		this.tbOsCity = tbOsCity;
-	}
+	
 
 	public String getCd() {
 		return cd;
@@ -73,6 +68,30 @@ public class TbOsDelegModel {
 
 	public void setUpdTsString(String updTsString) {
 		this.updTsString = updTsString;
+	}
+
+	public String getCityName() {
+		return cityName;
+	}
+
+	public void setCityName(String cityName) {
+		this.cityName = cityName;
+	}
+
+	public String getStateName() {
+		return stateName;
+	}
+
+	public void setStateName(String stateName) {
+		this.stateName = stateName;
+	}
+
+	public String getCountryName() {
+		return countryName;
+	}
+
+	public void setCountryName(String countryName) {
+		this.countryName = countryName;
 	}
 	
 	
