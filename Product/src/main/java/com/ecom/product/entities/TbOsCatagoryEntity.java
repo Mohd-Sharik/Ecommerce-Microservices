@@ -1,5 +1,6 @@
 package com.ecom.product.entities;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -12,8 +13,18 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "TB_OS_CATAGORY")
-public class TbOsCatagoryEntity {
+public class TbOsCatagoryEntity implements Serializable {
 	
+	
+	
+	
+	/**
+	 * @author Mohd Sharik
+	 */
+	private static final long serialVersionUID = 1L;
+
+	
+
 	@Id
 	@Column(name = "ID")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_OS_CATAGORY_GEN")
