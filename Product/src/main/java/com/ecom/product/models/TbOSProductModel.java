@@ -13,6 +13,11 @@ public class TbOSProductModel {
 	private String catagoryName;
 	private String catagoryDescr;
 	private Long quantity;
+	private Long discountId;
+	private String material;
+	private String brand;
+	private String color;
+	private String style;
 	private Date crtTs;
 	private String crtBy;
 	private Date updTs;
@@ -23,6 +28,9 @@ public class TbOSProductModel {
 	private String crtTsString;
 	private String updTsString;
 	private String dltTsString;
+	
+	
+	
 	public Long getId() {
 		return id;
 	}
@@ -119,7 +127,39 @@ public class TbOSProductModel {
 	public void setDltTsString(String dltTsString) {
 		this.dltTsString = dltTsString;
 	}
+	public Long getDiscountId() {
+		return discountId;
+	}
+	public void setDiscountId(Long discountId) {
+		this.discountId = discountId;
+	}
+	public String getMaterial() {
+		return material;
+	}
+	public void setMaterial(String material) {
+		this.material = material;
+	}
+	public String getBrand() {
+		return brand;
+	}
+	public void setBrand(String brand) {
+		this.brand = brand;
+	}
+	public String getColor() {
+		return color;
+	}
+	public void setColor(String color) {
+		this.color = color;
+	}
+	public String getStyle() {
+		return style;
+	}
+	public void setStyle(String style) {
+		this.style = style;
+	}
 	
 
+	
+	
 
 }

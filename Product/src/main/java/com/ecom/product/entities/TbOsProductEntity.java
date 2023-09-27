@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.core.sym.Name;
+
 @Entity
 @Table(name = "TB_OS_PRODUCTS")
 public class TbOsProductEntity  implements Serializable{
@@ -68,6 +70,18 @@ public class TbOsProductEntity  implements Serializable{
 	
 	@Column(name = "DLT_BY")
 	private String dltBy;
+	
+	@Column(name = "MATERIAL")
+	private String material;
+	
+	@Column(name = "BRAND")
+	private String brand;
+	
+	@Column(name = "COLOR")
+	private String color;
+	
+	@Column(name = "STYLE")
+	private String style;
 
 	public Long getId() {
 		return id;
@@ -175,6 +189,38 @@ public class TbOsProductEntity  implements Serializable{
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public String getMaterial() {
+		return material;
+	}
+
+	public void setMaterial(String material) {
+		this.material = material;
+	}
+
+	public String getBrand() {
+		return brand;
+	}
+
+	public void setBrand(String brand) {
+		this.brand = brand;
+	}
+
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
+	}
+
+	public String getStyle() {
+		return style;
+	}
+
+	public void setStyle(String style) {
+		this.style = style;
 	}
 	
 	
