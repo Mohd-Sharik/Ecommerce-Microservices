@@ -5,7 +5,7 @@ public class TbRpMRatingModel {
 	
 	    private Long id;
 		private Long userId;
-		private Long hotelId;
+		private Long productId;
 		private Long ratings;
 		private String feedback;
 		public Long getId() {
@@ -20,11 +20,12 @@ public class TbRpMRatingModel {
 		public void setUserId(Long userId) {
 			this.userId = userId;
 		}
-		public Long getHotelId() {
-			return hotelId;
+		
+		public Long getProductId() {
+			return productId;
 		}
-		public void setHotelId(Long hotelId) {
-			this.hotelId = hotelId;
+		public void setProductId(Long productId) {
+			this.productId = productId;
 		}
 		public Long getRatings() {
 			return ratings;

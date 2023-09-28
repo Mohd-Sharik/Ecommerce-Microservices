@@ -21,7 +21,30 @@ public class TbRpMRatingService {
 	
 	
 	
-	//get by id
+	
+	
+	//get By ProductId
+	public List<TbRpMRatingModel> findByProductId(Long id)
+	{
+		List<TbRpMRatingModel> response = new ArrayList<TbRpMRatingModel>();
+		if(id == null)
+			return null;
+		List<TbRpMRatingEntity> entities = tbRpMRatingPersistance.findByProductId(id);
+		for(TbRpMRatingEntity entity : entities)
+		{
+			TbRpMRatingModel model = new TbRpMRatingModel();
+			
+			model.setId(entity.getId() != null ? entity.getId() : null);
+			model.setUserId(entity.getUserId() != null ? entity.getUserId() : null);
+			model.setProductId(entity.getProductId() != null ? entity.getProductId() : null);
+			model.setRatings(entity.getRating() != null ? entity.getRating() : null);
+			model.setFeedback(entity.getFeedback() != null ? entity.getFeedback() : null);
+			
+			response.add(model);
+		}
+		return response; 
+	}
+	//get by Userid
 	public List<TbRpMRatingModel> ratingByUserId(Long id)
 	{
 		List<TbRpMRatingModel> response = new ArrayList<TbRpMRatingModel>();

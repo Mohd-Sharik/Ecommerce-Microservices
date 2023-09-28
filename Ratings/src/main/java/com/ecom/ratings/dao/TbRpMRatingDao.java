@@ -12,5 +12,7 @@ import com.ecom.ratings.entities.TbRpMRatingEntity;
 public interface TbRpMRatingDao extends JpaSpecificationExecutor<TbRpMRatingEntity>, JpaRepository<TbRpMRatingEntity, Long> {
 	
 	public List<TbRpMRatingEntity> findByUserId(Long id);
+	
+	public List<TbRpMRatingEntity> findByProductId(Long id);
 
 }

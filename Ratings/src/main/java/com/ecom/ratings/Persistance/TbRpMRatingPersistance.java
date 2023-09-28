@@ -20,6 +20,12 @@ public class TbRpMRatingPersistance {
 	private TbRpMRatingDao tbRpMRatingDao;
 	
 	
+	
+	//findByProductId
+	public List<TbRpMRatingEntity> findByProductId(Long id)
+	{
+		return tbRpMRatingDao.findByProductId(id);
+	}
 	//findByUserId
 	public List<TbRpMRatingEntity> findByUserId(Long id)
 	{

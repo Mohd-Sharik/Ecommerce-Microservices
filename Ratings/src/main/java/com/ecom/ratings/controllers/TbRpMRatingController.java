@@ -25,7 +25,22 @@ public class TbRpMRatingController {
 	@Autowired
 	private TbRpMRatingService tbRpMRatingService;
 	
-	//find by id ResponseEntity<List<TbRpMRatingModel>>
+	
+	
+	
+	//find by productId
+	@RequestMapping(value = "/findByProductId/{productId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<TbRpMRatingModel> findByProductId(@PathVariable("productId") Long productId)
+	{
+		List<TbRpMRatingModel> result = new ArrayList<TbRpMRatingModel>();
+		
+		result = tbRpMRatingService.findByProductId(productId);
+		
+		return result;
+	}
+	
+	
+	//find by userId 
 	@RequestMapping(value = "/findByUserIdRating/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<TbRpMRatingModel> findRatingByUserId(@PathVariable("id") Long id)
 	{

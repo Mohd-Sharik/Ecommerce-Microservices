@@ -12,9 +12,11 @@ import com.ecom.product.Persistance.TbOsProductPersistance;
 import com.ecom.product.entities.TbOSInventoryEntity;
 import com.ecom.product.entities.TbOsCatagoryEntity;
 import com.ecom.product.entities.TbOsProductEntity;
+import com.ecom.product.externalService.RatingService;
 import com.ecom.product.models.TbOSProductModel;
 import com.ecom.product.models.TbOsCatagoryModel;
 import com.ecom.product.models.TbOsInvntoryModel;
+import com.ecom.product.models.TbRpMRatingModel;
 import com.ecom.product.utility.CommonConstant;
 import com.ecom.product.utility.CommonUtilityHelper;
 
@@ -28,6 +30,8 @@ public class TbOsProductService {
 	private TbOsInventoryPersistance tbOsInventoryPersistance;
 	@Autowired
 	private TbOsProductPersistance tbOsProductPersistance;
+	@Autowired
+	private RatingService ratingService;
 	
 	
 	
@@ -54,7 +58,7 @@ public class TbOsProductService {
 			model.setCrtTsString(CommonUtilityHelper.Dateutil.getStringFormatDate(entity.getCrtTs(),CommonConstant.dateFormate.DD_MMM_YYYY_HHMMSS_SSS_A));
 			model.setUpdTsString(CommonUtilityHelper.Dateutil.getStringFormatDate(entity.getUpdTs(), CommonConstant.dateFormate.DD_MMM_YYYY_HHMMSS_SSS_A));
 			model.setDltTsString(CommonUtilityHelper.Dateutil.getStringFormatDate(entity.getDltTs(), CommonConstant.dateFormate.DD_MMM_YYYY_HHMMSS_SSS_A));
-			
+		
 			response.add(model);
 		}
 		
@@ -122,6 +126,9 @@ public class TbOsProductService {
 			model.setCrtTsString(CommonUtilityHelper.Dateutil.getStringFormatDate(entity.getCrtTs(), CommonConstant.dateFormate.DD_MMM_YYYY_HHMMSS_SSS_A));
 			model.setUpdTsString(CommonUtilityHelper.Dateutil.getStringFormatDate(entity.getUpdTs(), CommonConstant.dateFormate.DD_MMM_YYYY_HHMMSS_SSS_A));
 			model.setDltTsString(CommonUtilityHelper.Dateutil.getStringFormatDate(entity.getDltTs(), CommonConstant.dateFormate.DD_MMM_YYYY_HHMMSS_SSS_A));
+			
+			List<TbRpMRatingModel> reting  = ratingService.findByProductId(entity.getId());
+			model.setRatings(reting);
 			
 			response.add(model);
 		}

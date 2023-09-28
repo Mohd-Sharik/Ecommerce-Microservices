@@ -1,6 +1,7 @@
 package com.ecom.product.models;
 
 import java.util.Date;
+import java.util.List;
 
 public class TbOSProductModel {
 	
@@ -18,6 +19,7 @@ public class TbOSProductModel {
 	private String brand;
 	private String color;
 	private String style;
+	private List<TbRpMRatingModel> ratings;
 	private Date crtTs;
 	private String crtBy;
 	private Date updTs;
@@ -157,6 +159,14 @@ public class TbOSProductModel {
 	public void setStyle(String style) {
 		this.style = style;
 	}
+	public List<TbRpMRatingModel> getRatings() {
+		return ratings;
+	}
+	public void setRatings(List<TbRpMRatingModel> ratings) {
+		this.ratings = ratings;
+	}
+	
+	
 	
 
 	
