@@ -19,6 +19,13 @@ public class TbRpMRatingPersistance {
 	@Autowired
 	private TbRpMRatingDao tbRpMRatingDao;
 	
+	
+	//findByUserId
+	public List<TbRpMRatingEntity> findByUserId(Long id)
+	{
+		return tbRpMRatingDao.findByUserId(id);
+	}
+	
 	//find By id
 	public Optional<TbRpMRatingEntity> findById(Long id)
 	{

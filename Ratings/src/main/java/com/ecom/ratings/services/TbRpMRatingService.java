@@ -2,6 +2,7 @@ package com.ecom.ratings.services;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,35 @@ public class TbRpMRatingService {
 	
 	@Autowired
 	private TbRpMRatingPersistance tbRpMRatingPersistance;
+	
+	
+	
+	
+	//get by id
+	public List<TbRpMRatingModel> ratingByUserId(Long id)
+	{
+		List<TbRpMRatingModel> response = new ArrayList<TbRpMRatingModel>();
+		if(id == null)
+			return null;
+		List<TbRpMRatingEntity> entities = tbRpMRatingPersistance.findByUserId(id);
+		
+		for(TbRpMRatingEntity entity : entities)
+		{
+			TbRpMRatingModel model = new TbRpMRatingModel();
+			
+			model.setId(entity.getId());
+			model.setProductId(entity.getProductId());
+			model.setUserId(entity.getUserId());
+			model.setRatings(entity.getRating());
+			model.setFeedback(entity.getFeedback());
+			
+			response.add(model);
+		}
+		return response;
+	}
+	
+	
+	
 	
 	//getList Of Rating
 	public List<TbRpMRatingModel> getAllRating()

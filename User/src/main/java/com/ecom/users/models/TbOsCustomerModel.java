@@ -1,6 +1,7 @@
 package com.ecom.users.models;
 
 import java.util.Date;
+import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -16,7 +17,7 @@ public class TbOsCustomerModel {
 	private String fullName;
 	private String dislayName;
 	private String email;
-	private String comtactInfo;
+	private String contactInfo;
 	private String contactNumber;
 	private String dsgn;
 	private String location;
@@ -24,11 +25,22 @@ public class TbOsCustomerModel {
 	private Date lastLgnTs;
 	private Date exprTs;
 	private String pswdCrtBy;
-	private TbOsAdrssEntity tbOsAdrss;
-	private String serState;
+	private String userState;
 	private String sessionId;
 	private String ldaAuth;
 	private String skipInactie;
+	private String houseNo;
+	private String streeNo;
+	private String colonyName;
+	private String postalName;
+	private String postalCode;
+	private String deleName;
+	private String cityName;
+	private String stateName;
+	private String countryName;
+	private String addrType;
+	
+	private List<TbRpMRatingModel> ratings;
 	private Date crtTs;
 	private String crtBy;
 	private Date updTs;
@@ -77,11 +89,11 @@ public class TbOsCustomerModel {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getComtactInfo() {
-		return comtactInfo;
+	public String getContactInfo() {
+		return contactInfo;
 	}
-	public void setComtactInfo(String comtactInfo) {
-		this.comtactInfo = comtactInfo;
+	public void setContactInfo(String contactInfo) {
+		this.contactInfo = contactInfo;
 	}
 	public String getContactNumber() {
 		return contactNumber;
@@ -125,18 +137,15 @@ public class TbOsCustomerModel {
 	public void setPswdCrtBy(String pswdCrtBy) {
 		this.pswdCrtBy = pswdCrtBy;
 	}
-	public TbOsAdrssEntity getTbOsAdrss() {
-		return tbOsAdrss;
+	
+	
+	public String getUserState() {
+		return userState;
 	}
-	public void setTbOsAdrss(TbOsAdrssEntity tbOsAdrss) {
-		this.tbOsAdrss = tbOsAdrss;
+	public void setUserState(String userState) {
+		this.userState = userState;
 	}
-	public String getSerState() {
-		return serState;
-	}
-	public void setSerState(String serState) {
-		this.serState = serState;
-	}
+
 	public String getSessionId() {
 		return sessionId;
 	}
@@ -222,8 +231,75 @@ public class TbOsCustomerModel {
 		this.dltTsString = dltTsString;
 	}
 	
+	public String getHouseNo() {
+		return houseNo;
+	}
+	public void setHouseNo(String houseNo) {
+		this.houseNo = houseNo;
+	}
+	public String getStreeNo() {
+		return streeNo;
+	}
+	public void setStreeNo(String streeNo) {
+		this.streeNo = streeNo;
+	}
+	public String getColonyName() {
+		return colonyName;
+	}
+	public void setColonyName(String colonyName) {
+		this.colonyName = colonyName;
+	}
+	public String getPostalName() {
+		return postalName;
+	}
+	public void setPostalName(String postalName) {
+		this.postalName = postalName;
+	}
+	public String getPostalCode() {
+		return postalCode;
+	}
+	public void setPostalCode(String postalCode) {
+		this.postalCode = postalCode;
+	}
+	public String getDeleName() {
+		return deleName;
+	}
+	public void setDeleName(String deleName) {
+		this.deleName = deleName;
+	}
+	public String getCityName() {
+		return cityName;
+	}
+	public void setCityName(String cityName) {
+		this.cityName = cityName;
+	}
+	public String getStateName() {
+		return stateName;
+	}
+	public void setStateName(String stateName) {
+		this.stateName = stateName;
+	}
+	public String getCountryName() {
+		return countryName;
+	}
+	public void setCountryName(String countryName) {
+		this.countryName = countryName;
+	}
+	public String getAddrType() {
+		return addrType;
+	}
+	public void setAddrType(String addrType) {
+		this.addrType = addrType;
+	}
 	
 	
+	
+	public List<TbRpMRatingModel> getRatings() {
+		return ratings;
+	}
+	public void setRatings(List<TbRpMRatingModel> ratings) {
+		this.ratings = ratings;
+	}
 	public String validate()
 	{
 		StringBuilder sb = new StringBuilder();

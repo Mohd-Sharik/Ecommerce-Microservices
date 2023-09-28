@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ecom.users.externalService.RatingService;
 import com.ecom.users.models.TbOsAdrsModel;
 import com.ecom.users.models.TbOsCityModel;
 import com.ecom.users.models.TbOsColonyModdel;
@@ -30,10 +31,13 @@ public class TbOsAddressController {
 	@Autowired
 	private TbOsAddressService tbOsAddressService;
 	
+	@Autowired
+	private RatingService ratingService;
 	
 	
 	
-	//list Contry
+	
+	//list Country
 	@RequestMapping(value = "/getAllcontry", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<TbOsContryModdel>> getAll()
 	{

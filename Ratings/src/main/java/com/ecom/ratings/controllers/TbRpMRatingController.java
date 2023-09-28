@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,7 +25,14 @@ public class TbRpMRatingController {
 	@Autowired
 	private TbRpMRatingService tbRpMRatingService;
 	
-	
+	//find by id ResponseEntity<List<TbRpMRatingModel>>
+	@RequestMapping(value = "/findByUserIdRating/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<TbRpMRatingModel> findRatingByUserId(@PathVariable("id") Long id)
+	{
+		List<TbRpMRatingModel> result = new ArrayList<TbRpMRatingModel>();
+		result = tbRpMRatingService.ratingByUserId(id);
+		return result; //ResponseEntity.status(HttpStatus.FOUND).body(result);
+	}
 	//get All List of Rating
 	@RequestMapping(value = "/ratingList", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<TbRpMRatingModel>> getAllRating()

@@ -47,7 +47,7 @@ public class TbOsCustomerEntity implements Serializable{
 	private String email;
 	
 	@Column(name = "CNTCT_INFO")
-	private String comtactInfo;
+	private String contactInfo;
 	
 	@Column(name = "CNTCT_NUMBER")
 	private String contactNumber;
@@ -75,7 +75,7 @@ public class TbOsCustomerEntity implements Serializable{
 	private TbOsAdrssEntity tbOsAdrss;
 	
 	@Column(name = "USER_STATE")
-	private String serState;
+	private String userState;
 	
 	@Column(name = "SESSION_ID")
 	private String sessionId;
@@ -152,12 +152,22 @@ public class TbOsCustomerEntity implements Serializable{
 		this.email = email;
 	}
 
-	public String getComtactInfo() {
-		return comtactInfo;
+	
+
+	public String getContactInfo() {
+		return contactInfo;
 	}
 
-	public void setComtactInfo(String comtactInfo) {
-		this.comtactInfo = comtactInfo;
+	public void setContactInfo(String contactInfo) {
+		this.contactInfo = contactInfo;
+	}
+
+	public String getUserState() {
+		return userState;
+	}
+
+	public void setUserState(String userState) {
+		this.userState = userState;
 	}
 
 	public String getContactNumber() {
@@ -224,14 +234,7 @@ public class TbOsCustomerEntity implements Serializable{
 		this.tbOsAdrss = tbOsAdrss;
 	}
 
-	public String getSerState() {
-		return serState;
-	}
-
-	public void setSerState(String serState) {
-		this.serState = serState;
-	}
-
+	
 	public String getSessionId() {
 		return sessionId;
 	}
