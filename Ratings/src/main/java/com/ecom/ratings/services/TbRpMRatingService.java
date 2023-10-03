@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -91,5 +92,55 @@ public class TbRpMRatingService {
 		}
 		return response;
 	}
+	
+	// add or update rating
+	public TbRpMRatingModel addOrUpdate(TbRpMRatingModel model)
+	{
+		//TbRpMRatingModel response = rating;
+		Long id = model.getId();
+		
+		if(id != null)
+		{
+			Optional<TbRpMRatingEntity> reting = tbRpMRatingPersistance.findById(model.getId());
+			if(reting.isPresent())
+			{
+				TbRpMRatingEntity entity = reting.get();
+				
+				entity.setId(model.getId() != null ? model.getId() : null );
+				entity.setUserId(model.getUserId() != null ?  model.getUserId() : null);
+				entity.setProductId(model.getProductId() != null ? model.getProductId() : null);
+				entity.setRating(model.getRatings() != null ? model.getRatings() : null);
+				entity.setFeedback(model.getFeedback() != null ? model.getFeedback() : null);
+				
+				tbRpMRatingPersistance.save(entity);
+			}
+		}
+		else
+		{
+			TbRpMRatingEntity entity = new TbRpMRatingEntity();
+			
+			entity.setId( null );
+			entity.setUserId(model.getUserId() != null ?  model.getUserId() : entity.getUserId());
+			entity.setProductId(model.getProductId() != null ? model.getProductId() : entity.getProductId());
+			entity.setRating(model.getRatings() != null ? model.getRatings() : entity.getRating());
+			entity.setFeedback(model.getFeedback() != null ? model.getFeedback() : entity.getFeedback());
+			
+			tbRpMRatingPersistance.save(entity);
+		}		
+		return model;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

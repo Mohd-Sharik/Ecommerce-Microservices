@@ -21,9 +21,9 @@ public class TbRpMRatingEntity  implements Serializable {
 	
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_RP_M_RATING_GEN")
+	@SequenceGenerator(name = "SEQ_RP_M_RATING_GEN", sequenceName = "SEQ_RP_M_RATING", allocationSize = 1)
 	@Column(name = "ID")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_M_RATING_GEN")
-	@SequenceGenerator(name = "SEQ_M_RATING_GEN", sequenceName = "SEQ_M_RATING_GEN", allocationSize = 1)
 	private Long id;
 	
 	

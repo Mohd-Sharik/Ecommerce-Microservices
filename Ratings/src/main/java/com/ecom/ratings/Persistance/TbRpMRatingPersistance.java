@@ -38,6 +38,7 @@ public class TbRpMRatingPersistance {
 		return tbRpMRatingDao.findById(id);
 	}
 	//save
+	@Transactional
 	public TbRpMRatingEntity save(TbRpMRatingEntity entity)
 	{
 		return tbRpMRatingDao.save(entity);

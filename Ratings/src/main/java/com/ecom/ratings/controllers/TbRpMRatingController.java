@@ -9,6 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,7 +27,15 @@ public class TbRpMRatingController {
 	private TbRpMRatingService tbRpMRatingService;
 	
 	
-	
+	//add or Update Rating
+	@RequestMapping(value = "/addOrUpdareRating", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public TbRpMRatingModel addOrUpdate(@RequestBody TbRpMRatingModel entity)
+	{
+		TbRpMRatingModel result;
+		result = tbRpMRatingService.addOrUpdate(entity);
+		
+		return result;
+	}
 	
 	//find by productId
 	@RequestMapping(value = "/findByProductId/{productId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
