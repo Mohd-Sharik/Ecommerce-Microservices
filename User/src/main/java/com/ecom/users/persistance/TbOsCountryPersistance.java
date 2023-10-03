@@ -24,7 +24,7 @@ public class TbOsCountryPersistance {
 	
 	
 	
-	//geet by id
+			//get by id
 			public Optional<TbOsCountryEntity> findById(Long id)
 			{
 				return tbOsCountryDao.findById(id);

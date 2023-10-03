@@ -3,6 +3,7 @@ package com.ecom.users.services;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -59,7 +60,7 @@ public class TbOsAddressService {
 	private TbOsAdrsPersistance tbOsAdrsPersistance;
 	
 	
-	
+	// get All List of Country
 	public List<TbOsContryModdel>  listCountry()
 	{
 		List<TbOsCountryEntity> response = new ArrayList<>();
@@ -83,6 +84,53 @@ public class TbOsAddressService {
 		}
 		
 		return list;
+	}
+	
+	// add or update Country
+	public TbOsContryModdel addOrUpdateCountry(TbOsContryModdel model)
+	{
+		
+		try
+		{
+			Long id = model.getId();
+			if(id != null)
+			{
+				Optional<TbOsCountryEntity> getData = tbOsCountryPersistance.findById(id);
+				if(getData.isPresent())
+				{
+					TbOsCountryEntity entity = getData.get();
+					
+					entity.setId(model.getId() != null ? model.getId() : entity.getId());
+					entity.setName(model.getName() != null ? model.getName() : entity.getName());
+					entity.setNumCode(model.getNumCode());
+					entity.setAlphaCd2(model.getAlphaCd2() != null ? model.getAlphaCd2() : entity.getAlphaCd2());
+					entity.setAlphaCd3(model.getAlphaCd3() != null ? model.getAlphaCd3() : entity.getAlphaCd3());
+					entity.setUpdTs(new Date());
+					entity.setUpdBy(model.getUpdBy() != null ? model.getUpdBy() : entity.getUpdBy());
+					
+					tbOsCountryPersistance.save(entity);
+				}
+			}
+			else
+			{
+				TbOsCountryEntity entity  = new TbOsCountryEntity();
+				
+				entity.setId(model.getId() != null ? model.getId() : entity.getId());
+				entity.setName(model.getName() != null ? model.getName() : entity.getName());
+				entity.setNumCode(model.getNumCode());
+				entity.setAlphaCd2(model.getAlphaCd2() != null ? model.getAlphaCd2() : entity.getAlphaCd2());
+				entity.setAlphaCd3(model.getAlphaCd3() != null ? model.getAlphaCd3() : entity.getAlphaCd3());
+				entity.setUpdTs(new Date());
+				entity.setUpdBy("SYSTEM");
+				
+				tbOsCountryPersistance.save(entity);
+			}
+		}
+		catch(Exception e)
+		{
+			System.out.println("Exeception occure inside Add or Update Country "+e);
+		}
+		return model;
 	}
 	
 	//get All State List
@@ -115,7 +163,68 @@ public class TbOsAddressService {
 			return result;
 		}
 		
-		// get
+		//add or Updare State
+		public TbOsStateModel addOrUpdateState(TbOsStateModel model)
+		{
+			
+			try
+			{
+				Long id = model.getId();
+				if(id != null)
+				{
+					Optional<TbOsStateEntity> data = tbOsStatePersistance.findById(id);
+					if(data.isPresent())
+					{
+						TbOsStateEntity entity = data.get();
+						
+						entity.setId(model.getId() != null ? model.getId() : entity.getId());
+						Long cid = null;
+						if(entity.getTbOsCountry() != null)
+						{
+							cid = entity.getTbOsCountry().getId();
+						}
+						if(cid != null)
+						{
+							entity.setTbOsCountry(tbOsCountryPersistance.findById(cid).get());
+						}
+						entity.setCd(model.getCd() != null ? model.getCd() : entity.getCd());
+						entity.setNm(model.getNm() != null ? model.getNm() : entity.getNm());
+						entity.setUpdBy("SYSTEM");
+						entity.setUpdTs(new Date());
+						
+						tbOsStatePersistance.save(entity);
+					}
+				}
+				else
+				{
+					
+					TbOsStateEntity entity = new TbOsStateEntity();
+					
+					entity.setId(null);
+					Long cid = null;
+					if(entity.getTbOsCountry() != null)
+					{
+						cid = entity.getTbOsCountry().getId();
+					}
+					if(cid != null)
+					{
+						entity.setTbOsCountry(tbOsCountryPersistance.findById(cid).get());
+					}
+					
+					entity.setCd(model.getCd() != null ? model.getCd() : entity.getCd());
+					entity.setNm(model.getNm() != null ? model.getNm() : entity.getNm());
+					
+					tbOsStatePersistance.save(entity);
+				}
+			}
+			catch(Exception e)
+			{
+				System.out.println("Exception occur inside add or Update Satate Service method "+e);
+			}
+			return model;
+		}
+		
+		// get City
 		public List<TbOsCityModel> getAllCity()
 		{
 			List<TbOsCityModel> result = new ArrayList<TbOsCityModel>();
@@ -144,6 +253,64 @@ public class TbOsAddressService {
 		}
 		
 		
+		// add or Update City
+		public TbOsCityModel addOrUpdateCit(TbOsCityModel model)
+		{
+			
+			try
+			{
+				Long id = model.getId();
+				if(id != null)
+				{
+					Optional<TbOsCityEntity> data = tbOsCityPersistance.findById(id);
+					if(data.isPresent())
+					{
+						TbOsCityEntity entity = data.get();
+						
+						entity.setId(id);
+						Long sId = null;
+						if(entity.getTbOsState() != null)
+						{
+							sId = entity.getTbOsState().getId();
+						}
+						if(sId != null)
+						{
+							entity.setTbOsState(tbOsStatePersistance.findById(sId).get());
+						}
+						entity.setCd(model.getCd() != null ? model.getCd() : entity.getCd());
+						entity.setNm(model.getNm() != null ? model.getNm() : entity.getNm());
+						entity.setUpdBy("SYSTEM");
+						entity.setUpdTs(new Date());
+						
+						tbOsCityPersistance.save(entity);
+					}
+				}
+				else
+				{
+					TbOsCityEntity entity = new TbOsCityEntity();
+					entity.setId(null);
+					Long sId = null;
+					if(entity.getTbOsState() != null)
+					{
+						sId = entity.getTbOsState().getId();
+					}
+					if(sId != null)
+					{
+						entity.setTbOsState(tbOsStatePersistance.findById(sId).get());
+					}
+					entity.setCd(model.getCd() != null ? model.getCd() : entity.getCd());
+					entity.setNm(model.getNm() != null ? model.getNm() : entity.getNm());
+					
+					tbOsCityPersistance.save(entity);
+				}
+			}
+			catch(Exception e)
+			{
+				System.out.println("Exception occure inside Add or Update city Service Method : "+e);
+			}
+			return model;
+		}
+		
 		//get All Dele
 		public List<TbOsDelegModel> getDele()
 		{
@@ -168,6 +335,69 @@ public class TbOsAddressService {
 			}
 			
 			return response;
+		}
+		
+		
+		//Add or Update Deleg
+		public TbOsDelegModel addOrUpdateDeleg(TbOsDelegModel model)
+		{
+			try
+			{
+				Long id = model.getId();
+				if(id != null)
+				{
+					Optional<TbOsDelegEntity> data = tbOsDelePersistance.findById(id);
+					if(data.isPresent())
+					{
+						TbOsDelegEntity entity = data.get();
+						
+						entity.setId(id);
+						
+						Long cId = null;
+						if(entity.getTbOsCity() != null)
+						{
+							cId = entity.getTbOsCity().getId();
+						}
+						if(cId != null)
+						{
+							entity.setTbOsCity(tbOsCityPersistance.findById(cId).get());
+						}
+						entity.setCd(model.getCd() != null ? model.getCd() : entity.getCd());
+						entity.setNm(model.getNm() != null? model.getNm() : entity.getNm());
+						entity.setUpdBy("SYSTEM");
+						entity.setUpdTs(new Date());
+						
+						tbOsDelePersistance.save(entity);
+					}
+				}
+				else
+				{
+					TbOsDelegEntity entity = new TbOsDelegEntity();
+					
+					entity.setId(null);
+					
+					Long cId = null;
+					if(entity.getTbOsCity() != null)
+					{
+						cId = entity.getTbOsCity().getId();
+					}
+					if(cId != null)
+					{
+						entity.setTbOsCity(tbOsCityPersistance.findById(cId).get());
+					}
+					entity.setCd(model.getCd() != null ? model.getCd() : entity.getCd());
+					entity.setNm(model.getNm() != null? model.getNm() : entity.getNm());
+					
+					tbOsDelePersistance.save(entity);
+					
+				}
+			}
+			catch(Exception e)
+			{
+				System.out.println("Exception occure Inside add or Update Service Method : "+e);
+			}
+			
+			return model;
 		}
 		
 		public List<TbOsColonyModdel> getAllColony()
@@ -198,6 +428,67 @@ public class TbOsAddressService {
 		}
 		
 		
+		// Add or update Colony
+		public TbOsColonyModdel addOrUpdateColony(TbOsColonyModdel model)
+		{
+			
+			try
+			{
+				Long id  = model.getId();
+				if(id !=null)
+				{
+					Optional<TbOsColonyEntity> data = tbOsColonyPersistance.findById(id);
+					if(data.isPresent())
+					{
+						TbOsColonyEntity entity = data.get();
+						
+						entity.setId(id);
+						Long dId = null;
+						if(entity.getTbOsDeleg() != null)
+						{
+							dId = entity.getTbOsDeleg().getId();
+						}
+						if(dId != null)
+						{
+							entity.setTbOsDeleg(tbOsDelePersistance.findById(id).get());
+						}
+						entity.setCd(model.getCd() != null ? model.getCd() : entity.getCd());
+						entity.setNm(model.getNm() != null ? model.getNm() : entity.getNm());
+						entity.setUpdBy("SYSTEM");
+						entity.setUpdTs(new Date());
+						
+						tbOsColonyPersistance.save(entity);
+					}
+				}
+				else
+				{
+					TbOsColonyEntity entity = new TbOsColonyEntity();
+					
+					entity.setId(id);
+					Long dId = null;
+					if(entity.getTbOsDeleg() != null)
+					{
+						dId = entity.getTbOsDeleg().getId();
+					}
+					if(dId != null)
+					{
+						entity.setTbOsDeleg(tbOsDelePersistance.findById(id).get());
+					}
+					entity.setCd(model.getCd() != null ? model.getCd() : entity.getCd());
+					entity.setNm(model.getNm() != null ? model.getNm() : entity.getNm());
+					
+					tbOsColonyPersistance.save(entity);
+				}
+			}
+			catch(Exception e)
+			{
+				System.out.println("Exception occure inside Add or Update Colony Servie Method : "+e);
+			}
+			
+			return model;
+		}
+		
+		
 		//get All Postal
 		public List<TbOsPostalModel> getAllPoatal()
 		{
@@ -222,12 +513,72 @@ public class TbOsAddressService {
 				model.setUpdTs(entity.getUpdTs()!= null ? entity.getUpdTs() : null);
 				model.setUpdTsString(CommonUtilityHelper.Dateutil.getStringFormatDate(entity.getUpdTs(), CommonConstant.dateFormate.DD_MMM_YYYY_HHMMSS_SSS_A));
 				
-				response.add(model);
-				
+				response.add(model);	
+			}
+			return response;
+		}
+		
+		
+		// add or Update Postal
+		public TbOsPostalModel addOrUpdatePostal(TbOsPostalModel model)
+		{
+			
+			try
+			{
+				Long id = model.getId();
+				if(id != null)
+				{
+					Optional<TbOsPostalEntity> data = tbOsPostalPersistance.findById(id);
+					if(data.isPresent())
+					{
+						TbOsPostalEntity entity = new TbOsPostalEntity();
+						
+						entity.setId(id);
+						Long cId = null;
+						if(entity.getTbOsColony() != null)
+						{
+							cId = entity.getTbOsColony().getId();
+						}
+						if(cId != null)
+						{
+							entity.setTbOsColony(tbOsColonyPersistance.findById(cId).get());
+						}
+						entity.setCd(model.getCd() != null ? model.getCd() : entity.getCd());
+						entity.setNm(model.getNm() != null ? model.getNm() : entity.getNm());
+						entity.setUpdBy("SYSTEM");
+						entity.setUpdTs(new Date());
+						
+						tbOsPostalPersistance.save(entity);
+						
+					}
+				}
+				else
+				{
+					
+					TbOsPostalEntity entity = new TbOsPostalEntity();
+					entity.setId(null);
+					Long cId = null;
+					if(entity.getTbOsColony() != null)
+					{
+						cId = entity.getTbOsColony().getId();
+					}
+					if(cId != null)
+					{
+						entity.setTbOsColony(tbOsColonyPersistance.findById(cId).get());
+					}
+					entity.setCd(model.getCd() != null ? model.getCd() : entity.getCd());
+					entity.setNm(model.getNm() != null ? model.getNm() : entity.getNm());
+					
+					tbOsPostalPersistance.save(entity);
+			
+				}
+			}
+			catch(Exception e)
+			{
+				System.out.println("Exeption occure inside Add or Update Postal service methods : "+e);
 			}
 			
-			
-			return response;
+			return model;
 		}
 		
 		// get All Address
@@ -264,6 +615,73 @@ public class TbOsAddressService {
 			}
 			
 			return response;
+		}
+		
+		// Add or Update Address
+		public TbOsAdrsModel addOrUpdateAddress(TbOsAdrsModel model)
+		{
+			try
+			{
+				Long id = model.getId();
+				if(id != null)
+				{
+					Optional<TbOsAdrssEntity> data = tbOsAdrsPersistance.findById(id);
+					if(data.isPresent())
+					{
+						TbOsAdrssEntity entity  = data.get();
+						
+						entity.setId(model.getId() != null ? model.getId() : entity.getId());
+						setModelToEntity(model, entity);
+						entity.setUpdBy("SYSTEM");
+					   	entity.setUpdTs(new Date());
+						
+					}
+				}
+				else
+				{
+					TbOsAdrssEntity entity = new TbOsAdrssEntity();
+					
+						entity.setId(null);
+						setModelToEntity(model, entity);
+					    entity.setCrtTs(new Date());
+					    entity.setCrtBy("SYSTEM");
+					    	
+				}
+			}
+			catch(Exception e)
+			{
+				System.out.println("Exception occure inside add or Update Address sevice Methods "+e);
+			}
+			
+			
+			return model;
+		}
+		
+		private void setModelToEntity(TbOsAdrsModel model, TbOsAdrssEntity entity)
+		{
+			entity.setHouseNo(model.getHouseNo() != null ? model.getHouseNo() : entity.getHouseNo());
+			entity.setStreeNo(model.getStreeNo() != null ? model.getStreeNo() : entity.getStreeNo());
+			
+			Long cid = entity.getTbOsColony().getId();
+			entity.setTbOsColony(tbOsColonyPersistance.findById(cid).get());
+			
+			Long deId = entity.getTbOsDeleg().getId();
+			entity.setTbOsDeleg(tbOsDelePersistance.findById(deId).get());
+			
+		    Long ctId = entity.getTbOsCity().getId();
+		    entity.setTbOsCity(tbOsCityPersistance.findById(ctId).get());
+		    
+		    Long sId = entity.getTbOsState().getId();
+		    entity.setTbOsState(tbOsStatePersistance.findById(sId).get());
+		    
+		    Long coId = entity.getTbOsCountry().getId();
+		    entity.setTbOsCountry(tbOsCountryPersistance.findById(coId).get());
+		    
+		    Long pId = entity.getTbOsPostal().getId();
+		    entity.setTbOsPostal(tbOsPostalPersistance.findById(pId).get());
+		    
+		    entity.setAddrType(model.getAddrType() != null ? model.getAddrType() : entity.getAddrType());
+	
 		}
 
 
