@@ -31,7 +31,7 @@ public class TbOsCustomerController {
 	private TbOsCustomerService tbOsCustomerService;
 	
 	
-	
+	// get all user
 	@RequestMapping(value = "/getAllCustomers", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<TbOsCustomerModel>> getAllCustomers()
 	{
@@ -41,5 +41,13 @@ public class TbOsCustomerController {
 		
 		return ResponseEntity.status(HttpStatus.FOUND).body(result);
 	}
+	
+	
+	// add or Update user
+	
+	
+	
+	
+	
 
 }

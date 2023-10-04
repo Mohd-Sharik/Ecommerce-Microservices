@@ -1,12 +1,14 @@
 package com.ecom.users.services;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.ecom.users.commonUtil.CommonConstant;
@@ -32,6 +34,7 @@ public class TbOsCustomerService {
 	
 	
 	
+	// get all User
 	public List<TbOsCustomerModel> getAllCustomer()
 	{
 		List<TbOsCustomerModel> response = new ArrayList<TbOsCustomerModel>();
@@ -85,8 +88,155 @@ public class TbOsCustomerService {
 			 
 			 response.add(model);
 		}
-		
 		return response;
 	}
+	
+	// add or Update User
+	public TbOsCustomerModel addOrUpdateUser(TbOsCustomerModel model)
+	{
+		try
+		{
+			Long id = model.getId() != null ? model.getId() : null;
+			String email = model.getEmail();
+			String contact = model.getContactNumber();
+			
+			String valiResult = "SUCCESS";
+			
+			List<TbOsCustomerEntity> listUser = tbOsCustmerPersistance.findAll();
+			for(TbOsCustomerEntity ent : listUser)
+			{
+				if(id == null)
+				{
+					if(email.equalsIgnoreCase(ent.getEmail()))
+					{
+						valiResult = "Email already Exist : "+email;
+					}
+				}
+					else
+					{
+						if(id.longValue() != ent.getId().longValue() && email.equalsIgnoreCase(ent.getEmail()))
+						{
+							valiResult = "Email Already Exist ; "+email;
+						}
+					}
+				
+				if(id == null)
+				{
+					if(contact.equalsIgnoreCase(ent.getContactNumber()))
+					{
+						valiResult = "Contact already Exist : "+contact;
+					}
+				}
+					else
+					{
+						if(id.longValue() != ent.getId().longValue() && contact.equalsIgnoreCase(ent.getContactNumber()))
+						{
+							valiResult = "contact Number Already Exist : "+contact;
+						}
+						
+					}
+			}
+			
+			
+			if(valiResult == "SUCCESS")
+			{	
+				if(id != null)
+				{
+					
+					TbOsCustomerEntity entity = tbOsCustmerPersistance.findById(id).get();
+					
+					entity.setId(id);
+					setModelToEntity(model, entity);
+					entity.setUpdBy(model.getCrtBy());
+					entity.setUpdTs(new Date());
+					
+					tbOsCustmerPersistance.save(entity);
+				}
+				else
+				{
+					TbOsCustomerEntity entity = new TbOsCustomerEntity();
+					entity.setId(null);
+					String password =  "check";//CommonUtilityHelper.getAlphaNumericString(12); //CommonUtilityHelper.getAlphaNumericString(16);
+					entity.setPswd(password);
+					entity.setLdaAuth(model.getLdaAuth());
+					setModelToEntity(model, entity);
+					entity.setRefId("SCRIPT_USER");
+					entity.setCrtBy(model.getCrtBy());
+					entity.setCrtTs(new Date());
+					tbOsCustmerPersistance.save(entity);
+					
+					if(StringUtils.equals(entity.getLdaAuth(), "N"))  //if(StringUtils.equals(entity.getLdaAuth(), CommonConstant.N))
+					{
+						entity.setRefId(entity.getFullName().substring(0, 2).toUpperCase()+entity.getId());
+						String hashpassword = entity.getRefId()+entity.getPswd();
+						entity.setPswd(hashpassword);   //entity.setPswd(MessageDiagestUtil.getHash(hashpassword));
+						entity.setPswdCrtBy("SCRIPT_USER");//entity.setPswdCrtBy(CommonConstant.SCRIPT_USER);
+					}
+					else
+						if(StringUtils.equals(entity.getLdaAuth(), "Y"))  //if(StringUtils.equals(entity.getLdaAuth(), CommonConstant.Y))
+						{
+							entity.setRefId(model.getRefId());
+							String passw = entity.getRefId()+password;
+							entity.setPswd(passw);  //entity.setPswd(MessageDiagestUtil.getHash(passw));
+							entity.setCrtBy("SCRIPT_USER");   //entity.setCrtBy(CommonConstant.SCRIPT_USER);
+						}
+					tbOsCustmerPersistance.save(entity);
+					
+				}
+				//response.setResponse(model);    //response.setResponse(model);
+				
+			}
+			else
+			{
+//				response.setSucces(false);
+//				response.getErrParam().setErrCode("No-Code");
+//				response.getErrParam().setErrDesc(valiResult);
+				System.out.println("Contact or Email Alread Exist : ");
+			}			
+		}
+		catch(Exception e)
+		{
+			System.out.println("Exception occure inside add or update user service : "+e);
+		}
+		return model;
+	}
+	
+	
+	// set Model to entity 
+		private void setModelToEntity(TbOsCustomerModel model, TbOsCustomerEntity entity)
+		{
+			entity.setRefId(model.getRefId() != null ? model.getRefId() : entity.getRefId());
+			entity.setPswd(model.getPswd() != null ? model.getPswd() : entity.getPswd());
+			entity.setFullName(model.getFullName() != null ? model.getFullName() : entity.getFullName());
+			entity.setDislayName(model.getDislayName() != null ? model.getDislayName() : entity.getDislayName());
+			entity.setEmail(model.getEmail() != null ? model.getEmail() : entity.getEmail());
+			entity.setContactInfo(model.getContactInfo() != null ? model.getContactInfo() : entity.getContactInfo());
+			entity.setContactNumber(model.getContactNumber() != null ? model.getContactNumber() : entity.getContactNumber());
+			entity.setLocation(model.getLocation() != null ? model.getLocation() : entity.getLocation());
+			entity.setFldLgnCnt(model.getFldLgnCnt() != null ? model.getFldLgnCnt() : entity.getFldLgnCnt());
+			//entity.setLstLgnTs(model.getLstLgnCnt() != null ? model.getLstLgnCnt() : entity.getLstLgnTs());
+			entity.setExprTs(model.getExprTs() != null ? model.getExprTs() : entity.getExprTs());
+			entity.setPswdCrtBy(model.getPswdCrtBy() != null ? model.getPswdCrtBy() : entity.getPswdCrtBy());
+			entity.setUserState(model.getUserState() != null ? model.getUserState() : entity.getUserState());
+			entity.setSessionId(model.getSessionId() != null ? model.getSessionId() : entity.getSessionId());
+			entity.setLdaAuth(model.getLdaAuth() != null ? model.getLdaAuth() : entity.getLdaAuth());
+			entity.setSkipInactie(model.getSkipInactie() != null ? model.getSkipInactie() : entity.getSkipInactie());
+			entity.setDltBy(model.getDltBy() != null ? model.getDltBy() : entity.getDltBy());
+			entity.setDltTs(model.getDltTs() != null ? model.getDltTs() : entity.getDltTs());
+			//entity.setEncKeyId(model.getEncKeyId() != null ? model.getEncKeyId() : entity.getEncKeyId());
+		}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

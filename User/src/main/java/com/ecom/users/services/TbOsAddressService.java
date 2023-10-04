@@ -106,7 +106,7 @@ public class TbOsAddressService {
 					entity.setAlphaCd2(model.getAlphaCd2() != null ? model.getAlphaCd2() : entity.getAlphaCd2());
 					entity.setAlphaCd3(model.getAlphaCd3() != null ? model.getAlphaCd3() : entity.getAlphaCd3());
 					entity.setUpdTs(new Date());
-					entity.setUpdBy(model.getUpdBy() != null ? model.getUpdBy() : entity.getUpdBy());
+					entity.setUpdBy("SYSTEM");
 					
 					tbOsCountryPersistance.save(entity);
 				}
@@ -115,13 +115,12 @@ public class TbOsAddressService {
 			{
 				TbOsCountryEntity entity  = new TbOsCountryEntity();
 				
-				entity.setId(model.getId() != null ? model.getId() : entity.getId());
+				entity.setId(null);
 				entity.setName(model.getName() != null ? model.getName() : entity.getName());
 				entity.setNumCode(model.getNumCode());
 				entity.setAlphaCd2(model.getAlphaCd2() != null ? model.getAlphaCd2() : entity.getAlphaCd2());
 				entity.setAlphaCd3(model.getAlphaCd3() != null ? model.getAlphaCd3() : entity.getAlphaCd3());
-				entity.setUpdTs(new Date());
-				entity.setUpdBy("SYSTEM");
+				
 				
 				tbOsCountryPersistance.save(entity);
 			}
@@ -157,9 +156,6 @@ public class TbOsAddressService {
 				
 				result.add(model);
 			}
-			
-			
-			
 			return result;
 		}
 		

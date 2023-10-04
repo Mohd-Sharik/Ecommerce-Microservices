@@ -215,6 +215,7 @@ public class TbOsAddressController {
 	}
 	
 	//add or Update Address
+	@RequestMapping(value = "/addOrUpdateAdrs", method = RequestMethod.POST, produces =  MediaType.APPLICATION_JSON_VALUE)
 	public TbOsAdrsModel addOrUpdateAddrs(@RequestBody TbOsAdrsModel model)
 	{
 		TbOsAdrsModel result = null;
