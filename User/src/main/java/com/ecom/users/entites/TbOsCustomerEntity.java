@@ -26,9 +26,9 @@ public class TbOsCustomerEntity implements Serializable{
 	
 	
 	@Id
-	@Column(name = "ID")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_OS_CUSTMR_GEN")
 	@SequenceGenerator(name = "SEQ_OS_CUSTMR_GEN", sequenceName = "SEQ_OS_CUSTMR", allocationSize = 1)
+	@Column(name = "ID")
 	private Long id;
 	
 	@Column(name = "REF_ID")
@@ -59,7 +59,7 @@ public class TbOsCustomerEntity implements Serializable{
 	private String location;
 	
 	@Column(name = "FLD_LGN_CNT")
-	private Long fldLgnCnt;
+	private Integer fldLgnCnt;
 	
 	@Column(name = "LST_LGN_TS")
 	private Date lastLgnTs;
@@ -194,11 +194,13 @@ public class TbOsCustomerEntity implements Serializable{
 		this.location = location;
 	}
 
-	public Long getFldLgnCnt() {
+	
+
+	public Integer getFldLgnCnt() {
 		return fldLgnCnt;
 	}
 
-	public void setFldLgnCnt(Long fldLgnCnt) {
+	public void setFldLgnCnt(Integer fldLgnCnt) {
 		this.fldLgnCnt = fldLgnCnt;
 	}
 

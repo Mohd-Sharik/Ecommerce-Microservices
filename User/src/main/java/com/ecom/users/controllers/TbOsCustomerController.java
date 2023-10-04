@@ -3,6 +3,8 @@ package com.ecom.users.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.print.attribute.standard.Media;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -44,6 +47,20 @@ public class TbOsCustomerController {
 	
 	
 	// add or Update user
+	@RequestMapping(value = "/addOrUpdateUser", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public TbOsCustomerModel addorUpdateUser(@RequestBody TbOsCustomerModel model)
+	{
+		TbOsCustomerModel result =null;
+		try
+		{
+			result = tbOsCustomerService.addOrUpdateUser(model);
+		}
+		catch(Exception e)
+		{
+			System.out.println("Exception occre inside Add or Updare User Controller : "+e);
+		}
+		return result;
+	}
 	
 	
 	

@@ -21,7 +21,7 @@ public class TbOsCustomerModel {
 	private String contactNumber;
 	private String dsgn;
 	private String location;
-	private Long fldLgnCnt;
+	private Integer fldLgnCnt;
 	private Date lastLgnTs;
 	private Date exprTs;
 	private String pswdCrtBy;
@@ -113,10 +113,11 @@ public class TbOsCustomerModel {
 	public void setLocation(String location) {
 		this.location = location;
 	}
-	public Long getFldLgnCnt() {
+	
+	public Integer getFldLgnCnt() {
 		return fldLgnCnt;
 	}
-	public void setFldLgnCnt(Long fldLgnCnt) {
+	public void setFldLgnCnt(Integer fldLgnCnt) {
 		this.fldLgnCnt = fldLgnCnt;
 	}
 	public Date getLastLgnTs() {
@@ -304,20 +305,7 @@ public class TbOsCustomerModel {
 	{
 		StringBuilder sb = new StringBuilder();
 		
-		boolean flag = StringUtils.isBlank(refId);
-		
-		if(flag)
-		{
-			sb.append("Customer refId is Blan : "+refId);
-		}
-		
-		flag = StringUtils.isBlank(pswd);
-		if(flag)
-		{
-			sb.append("Customer pswd is Blank : "+pswd);
-		}
-		
-		flag = StringUtils.isBlank(fullName);
+		boolean flag = StringUtils.isBlank(fullName);
 		if(flag)
 		{
 			sb.append("Customer fullName is Blank : "+fullName);

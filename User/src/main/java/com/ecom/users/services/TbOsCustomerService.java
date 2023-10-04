@@ -18,6 +18,7 @@ import com.ecom.users.externalService.RatingService;
 import com.ecom.users.models.TbOsCustomerModel;
 import com.ecom.users.models.TbRpMRatingModel;
 import com.ecom.users.persistance.TbOsCustmerPersistance;
+import com.onlineShop.example.commonModel.ServiceOperationResult;
 
 @Service
 public class TbOsCustomerService {
@@ -56,7 +57,6 @@ public class TbOsCustomerService {
 			 model.setDsgn(entity.getDsgn() != null ? entity.getDsgn() : null);
 			 model.setLocation(entity.getLocation() != null ? entity.getLocation() : null);
 			 model.setFldLgnCnt(entity.getFldLgnCnt() != null ? entity.getFldLgnCnt() : null);
-			 model.setFldLgnCnt(entity.getFldLgnCnt() != null ? entity.getFldLgnCnt() : null);
 			 model.setExprTs(entity.getExprTs() != null ? entity.getExprTs() : null);
 			 model.setPswdCrtBy(entity.getPswdCrtBy() != null ? entity.getPswdCrtBy() : null);
 			 model.setHouseNo(entity.getTbOsAdrss() != null ? entity.getTbOsAdrss().getHouseNo() : null);
@@ -92,7 +92,7 @@ public class TbOsCustomerService {
 	}
 	
 	// add or Update User
-	public TbOsCustomerModel addOrUpdateUser(TbOsCustomerModel model)
+	public TbOsCustomerModel addOrUpdateUser(TbOsCustomerModel model) throws Exception
 	{
 		try
 		{
@@ -156,15 +156,18 @@ public class TbOsCustomerService {
 				{
 					TbOsCustomerEntity entity = new TbOsCustomerEntity();
 					entity.setId(null);
-					String password =  "check";//CommonUtilityHelper.getAlphaNumericString(12); //CommonUtilityHelper.getAlphaNumericString(16);
+					String password =  "checkPasword";//CommonUtilityHelper.getAlphaNumericString(12); //CommonUtilityHelper.getAlphaNumericString(16);
 					entity.setPswd(password);
-					entity.setLdaAuth(model.getLdaAuth());
+					entity.setLdaAuth(model.getLdaAuth() != null ? model.getLdaAuth() : entity.getLdaAuth());
 					setModelToEntity(model, entity);
 					entity.setRefId("SCRIPT_USER");
-					entity.setCrtBy(model.getCrtBy());
+					entity.setCrtBy("SYSTE");
+					entity.setFldLgnCnt(0);
 					entity.setCrtTs(new Date());
-					tbOsCustmerPersistance.save(entity);
 					
+					logger.info("chec{}"+entity);
+					System.out.println(entity = tbOsCustmerPersistance.save(entity));
+					logger.info("chec{}1"+entity);
 					if(StringUtils.equals(entity.getLdaAuth(), "N"))  //if(StringUtils.equals(entity.getLdaAuth(), CommonConstant.N))
 					{
 						entity.setRefId(entity.getFullName().substring(0, 2).toUpperCase()+entity.getId());
@@ -196,7 +199,8 @@ public class TbOsCustomerService {
 		}
 		catch(Exception e)
 		{
-			System.out.println("Exception occure inside add or update user service : "+e);
+			System.out.println("Exception occure inside add or update user service : "+e.getStackTrace());
+			throw new Exception();
 		}
 		return model;
 	}
@@ -213,7 +217,6 @@ public class TbOsCustomerService {
 			entity.setContactInfo(model.getContactInfo() != null ? model.getContactInfo() : entity.getContactInfo());
 			entity.setContactNumber(model.getContactNumber() != null ? model.getContactNumber() : entity.getContactNumber());
 			entity.setLocation(model.getLocation() != null ? model.getLocation() : entity.getLocation());
-			entity.setFldLgnCnt(model.getFldLgnCnt() != null ? model.getFldLgnCnt() : entity.getFldLgnCnt());
 			//entity.setLstLgnTs(model.getLstLgnCnt() != null ? model.getLstLgnCnt() : entity.getLstLgnTs());
 			entity.setExprTs(model.getExprTs() != null ? model.getExprTs() : entity.getExprTs());
 			entity.setPswdCrtBy(model.getPswdCrtBy() != null ? model.getPswdCrtBy() : entity.getPswdCrtBy());
@@ -221,11 +224,11 @@ public class TbOsCustomerService {
 			entity.setSessionId(model.getSessionId() != null ? model.getSessionId() : entity.getSessionId());
 			entity.setLdaAuth(model.getLdaAuth() != null ? model.getLdaAuth() : entity.getLdaAuth());
 			entity.setSkipInactie(model.getSkipInactie() != null ? model.getSkipInactie() : entity.getSkipInactie());
+			entity.setDsgn(model.getDsgn() != null ? model.getDsgn() : entity.getDsgn());
 			entity.setDltBy(model.getDltBy() != null ? model.getDltBy() : entity.getDltBy());
 			entity.setDltTs(model.getDltTs() != null ? model.getDltTs() : entity.getDltTs());
 			//entity.setEncKeyId(model.getEncKeyId() != null ? model.getEncKeyId() : entity.getEncKeyId());
 		}
-	
 	
 	
 	
