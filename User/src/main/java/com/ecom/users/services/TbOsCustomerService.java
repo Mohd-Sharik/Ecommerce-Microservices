@@ -18,7 +18,6 @@ import com.ecom.users.externalService.RatingService;
 import com.ecom.users.models.TbOsCustomerModel;
 import com.ecom.users.models.TbRpMRatingModel;
 import com.ecom.users.persistance.TbOsCustmerPersistance;
-import com.onlineShop.example.commonModel.ServiceOperationResult;
 import com.onlineShop.example.exception.BusinessException;
 import com.onlineShop.example.exception.DatabaseException;
 

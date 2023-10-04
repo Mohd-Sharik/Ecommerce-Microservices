@@ -3,8 +3,6 @@ package com.ecom.users.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.print.attribute.standard.Media;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

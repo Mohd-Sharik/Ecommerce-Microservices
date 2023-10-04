@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 
-import com.ecom.users.entites.TbOsAdrssEntity;
 
 public class TbOsCustomerModel {
 	
