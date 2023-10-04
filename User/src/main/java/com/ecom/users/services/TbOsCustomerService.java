@@ -19,6 +19,8 @@ import com.ecom.users.models.TbOsCustomerModel;
 import com.ecom.users.models.TbRpMRatingModel;
 import com.ecom.users.persistance.TbOsCustmerPersistance;
 import com.onlineShop.example.commonModel.ServiceOperationResult;
+import com.onlineShop.example.exception.BusinessException;
+import com.onlineShop.example.exception.DatabaseException;
 
 @Service
 public class TbOsCustomerService {
@@ -231,7 +233,43 @@ public class TbOsCustomerService {
 		}
 	
 	
-	
+	// Soft Delete user
+		public TbOsCustomerModel  softDleteUser(TbOsCustomerModel model)
+		{
+			TbOsCustomerModel response = model;
+			Long id = model.getId();
+			if(id == null)
+				 throw new BusinessException("Id Must not be Null ");
+			try
+			{
+				Optional<TbOsCustomerEntity> user = tbOsCustmerPersistance.findById(id);
+				if(user.isPresent())
+				{
+					TbOsCustomerEntity entity = user.get();
+					if(model.getDltBy() == null)
+					{
+						entity.setDltBy("Custom");
+						entity.setDltTs(new Date());
+						
+					}
+					else
+					{
+						model.setDltBy(null);
+						model.setDltTs(null);
+					}
+					tbOsCustmerPersistance.save(entity);
+				}
+				else
+				{
+					throw new BusinessException("User Not found in Database : ");
+				}
+			}
+			catch(DatabaseException e)
+			{
+				throw new BusinessException(e);
+			}
+			return response;
+		}
 	
 	
 	

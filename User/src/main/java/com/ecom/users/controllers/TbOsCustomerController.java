@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ecom.users.models.TbOsCustomerModel;
 import com.ecom.users.services.TbOsCustomerService;
+import com.onlineShop.example.exception.BusinessException;
+import com.onlineShop.example.exception.DatabaseException;
 
 
 @RestController
@@ -62,6 +64,22 @@ public class TbOsCustomerController {
 		return result;
 	}
 	
+	
+	// User Soft Delete
+	@RequestMapping(value = "/userSoftDelete", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public TbOsCustomerModel softDeletUser(TbOsCustomerModel model)
+	{
+		TbOsCustomerModel result = null;
+		try
+		{
+			result = tbOsCustomerService.softDleteUser(model);
+		}
+		catch(DatabaseException e)
+		{
+			throw new BusinessException(e);
+		}
+		return result;
+	}
 	
 	
 	
