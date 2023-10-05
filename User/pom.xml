@@ -25,6 +25,13 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/io.github.resilience4j/resilience4j-spring-boot2 -->
+		<dependency>
+			<groupId>io.github.resilience4j</groupId>
+			<artifactId>resilience4j-spring-boot2</artifactId>
+		</dependency>
+
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
@@ -41,11 +48,11 @@
 			<artifactId>spring-boot-starter-aop</artifactId>
 
 		</dependency>
-<dependency>
-<groupId>Online-API</groupId>
-<artifactId>shopCommon</artifactId>
-<version>${API-shopCommon-version}</version>
-</dependency>
+		<dependency>
+			<groupId>Online-API</groupId>
+			<artifactId>shopCommon</artifactId>
+			<version>${API-shopCommon-version}</version>
+		</dependency>
 
 
 		<dependency>

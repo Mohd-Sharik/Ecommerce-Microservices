@@ -3,6 +3,8 @@ package com.ecom.product.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -16,11 +18,16 @@ import com.ecom.product.models.TbOSProductModel;
 import com.ecom.product.models.TbOsCatagoryModel;
 import com.ecom.product.models.TbOsInvntoryModel;
 import com.ecom.product.services.TbOsProductService;
+//import com.ecom.users.services.TbOsCustomerService;
+
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 
 @RestController
 @CrossOrigin
 @RequestMapping("/product")
 public class TbOsProductController {
+	
+//Logger logger = LoggerFactory.getLogger(TbOsProductController.class);
 	
 	@Autowired
 	private TbOsProductService tbOsProductService;
@@ -49,6 +56,7 @@ public class TbOsProductController {
 	
 	//List Product
 	@RequestMapping(value = "/productList", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@CircuitBreaker(name = "myCircuitBreaker", fallbackMethod = "fallbackmethod")
 	public ResponseEntity<List<TbOSProductModel>> getAllProduct()
 	{
 		List<TbOSProductModel> result = new ArrayList<TbOSProductModel>();
@@ -56,6 +64,19 @@ public class TbOsProductController {
 		
 		return ResponseEntity.status(HttpStatus.FOUND).body(result);
 				
+	}
+	
+	public ResponseEntity<TbOSProductModel> fallbackmethod(Exception e)
+	{
+		System.out.println("execute fallbac method because service is down : "+e);
+		TbOSProductModel model = new TbOSProductModel();
+		
+		model.setProductName("failedName");
+		model.setBrand("DummyBrand");
+		model.setColor("NetworFailed");
+		model.setCatagoryDescr("nothing is there because method failed");
+		
+		return ResponseEntity.status(HttpStatus.FOUND).body(model);
 	}
 
 }
