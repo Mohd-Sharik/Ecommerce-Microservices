@@ -8,8 +8,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ecom.users.commonUtil.CommonConstant;
-import com.ecom.users.commonUtil.CommonUtilityHelper;
+import com.ecom.users.commonUtil.UtilityHelper;
 import com.ecom.users.entites.TbOsAdrssEntity;
 import com.ecom.users.entites.TbOsCityEntity;
 import com.ecom.users.entites.TbOsColonyEntity;
@@ -31,6 +30,7 @@ import com.ecom.users.persistance.TbOsCountryPersistance;
 import com.ecom.users.persistance.TbOsDelePersistance;
 import com.ecom.users.persistance.TbOsPostalPersistance;
 import com.ecom.users.persistance.TbOsStatePersistance;
+import com.onlineShop.example.commonUtilMethods.CommonConstant;
 
 @Service
 public class TbOsAddressService {
@@ -78,7 +78,7 @@ public class TbOsAddressService {
 			model.setAlphaCd3(entity.getAlphaCd3() != null ? entity.getAlphaCd3() : null);
 			model.setUpdBy(entity.getUpdBy() != null ? entity.getUpdBy() : null);
 			model.setUpdTs(entity.getUpdTs() != null ? entity.getUpdTs() : null);
-			model.setUpddTsString(CommonUtilityHelper.Dateutil.getStringFormatDate(entity.getUpdTs(), CommonConstant.dateFormate.DD_MMM_YYYY_HHMMSS_SSS_A));
+			model.setUpddTsString(UtilityHelper.Dateutil.getStringFormatDate(entity.getUpdTs(), CommonConstant.DateFormat.DD_MMM_YYYY_HHMMSS_SSS_A));
 			
 			list.add(model);
 		}
@@ -152,7 +152,7 @@ public class TbOsAddressService {
 				model.setNm(entity.getNm() != null ? entity.getNm() : null);
 				model.setUpdBy(entity.getUpdBy() != null ? entity.getUpdBy() : null);
 				model.setUpdTs(entity.getUpdTs() != null ? entity.getUpdTs() : null);
-				model.setUpdTsString(CommonUtilityHelper.Dateutil.getStringFormatDate(entity.getUpdTs(), CommonConstant.dateFormate.DD_MMM_YYYY_HHMMSS_SSS_A));
+				model.setUpdTsString(UtilityHelper.Dateutil.getStringFormatDate(entity.getUpdTs(), CommonConstant.DateFormat.DD_MMM_YYYY_HHMMSS_SSS_A));
 				
 				result.add(model);
 			}
@@ -240,7 +240,7 @@ public class TbOsAddressService {
 				
 				model.setUpdBy(entity.getUpdBy() != null ? entity.getUpdBy() : null);
 				model.setUpdTs(entity.getUpdTs() != null ? entity.getUpdTs() : null);
-				model.setUpdTsString(CommonUtilityHelper.Dateutil.getStringFormatDate(entity.getUpdTs(), CommonConstant.dateFormate.DD_MMM_YYYY_HHMMSS_SSS_A));
+				model.setUpdTsString(UtilityHelper.Dateutil.getStringFormatDate(entity.getUpdTs(), CommonConstant.DateFormat.DD_MMM_YYYY_HHMMSS_SSS_A));
 
 				result.add(model);
 			}
@@ -325,7 +325,7 @@ public class TbOsAddressService {
 				model.setCountryName(entity.getTbOsCity() != null ? entity.getTbOsCity().getTbOsState().getTbOsCountry().getName() : null);
 				model.setUpdBy(entity.getUpdBy() != null ? entity.getUpdBy() : null);
 				model.setUpdTs(entity.getUpdTs() != null ? entity.getUpdTs() : null);
-				model.setUpdTsString(CommonUtilityHelper.Dateutil.getStringFormatDate(entity.getUpdTs(), CommonConstant.dateFormate.DD_MMM_YYYY_HHMMSS_SSS_A));
+				model.setUpdTsString(UtilityHelper.Dateutil.getStringFormatDate(entity.getUpdTs(), CommonConstant.DateFormat.DD_MMM_YYYY_HHMMSS_SSS_A));
 				
 				response.add(model);
 			}
@@ -415,7 +415,7 @@ public class TbOsAddressService {
 				model.setCountryName(entity.getTbOsDeleg() != null ? entity.getTbOsDeleg().getTbOsCity().getTbOsState().getTbOsCountry().getName() : null);
 				model.setUpdBy(entity.getUpdBy() != null ? entity.getUpdBy(): null);
 				model.setUpdTs(entity.getUpdTs() != null ? entity.getUpdTs() : null);
-				model.setUpdTsString(CommonUtilityHelper.Dateutil.getStringFormatDate(entity.getUpdTs(), CommonConstant.dateFormate.DD_MMM_YYYY_HHMMSS_SSS_A));
+				model.setUpdTsString(UtilityHelper.Dateutil.getStringFormatDate(entity.getUpdTs(), CommonConstant.DateFormat.DD_MMM_YYYY_HHMMSS_SSS_A));
 				
 				response.add(model);
 			}
@@ -507,7 +507,7 @@ public class TbOsAddressService {
 				model.setCountryName(entity.getTbOsColony() != null ? entity.getTbOsColony().getTbOsDeleg().getTbOsCity().getTbOsState().getTbOsCountry().getName() : null);
 				model.setUpdBy(entity.getUpdBy() != null ? entity.getUpdBy() : null);
 				model.setUpdTs(entity.getUpdTs()!= null ? entity.getUpdTs() : null);
-				model.setUpdTsString(CommonUtilityHelper.Dateutil.getStringFormatDate(entity.getUpdTs(), CommonConstant.dateFormate.DD_MMM_YYYY_HHMMSS_SSS_A));
+				model.setUpdTsString(UtilityHelper.Dateutil.getStringFormatDate(entity.getUpdTs(), CommonConstant.DateFormat.DD_MMM_YYYY_HHMMSS_SSS_A));
 				
 				response.add(model);	
 			}
@@ -604,8 +604,8 @@ public class TbOsAddressService {
 				model.setCrtBy(entity.getCrtBy() != null ? entity.getCrtBy() : null);
 				model.setUpdBy(entity.getUpdBy() != null ? entity.getUpdBy() : null);
 				model.setUpdBy(entity.getUpdTs() != null ? entity.getUpdBy() : null);
-				model.setCrtTsString(CommonUtilityHelper.Dateutil.getStringFormatDate(entity.getCrtTs(),CommonConstant.dateFormate.DD_MMM_YYYY_HHMMSS_SSS_A));
-				model.setUpdTsString(CommonUtilityHelper.Dateutil.getStringFormatDate(entity.getUpdTs(), CommonConstant.dateFormate.DD_MMM_YYYY_HHMMSS_SSS_A));
+				model.setCrtTsString(UtilityHelper.Dateutil.getStringFormatDate(entity.getCrtTs(),CommonConstant.DateFormat.DD_MMM_YYYY_HHMMSS_SSS_A));
+				model.setUpdTsString(UtilityHelper.Dateutil.getStringFormatDate(entity.getUpdTs(), CommonConstant.DateFormat.DD_MMM_YYYY_HHMMSS_SSS_A));
 				
 				response.add(model);
 			}

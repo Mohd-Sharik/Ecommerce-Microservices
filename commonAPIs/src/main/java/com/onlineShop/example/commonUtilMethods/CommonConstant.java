@@ -18,6 +18,10 @@ public class CommonConstant {
 	public static final String AUTH_TKN_KEY = "authToken";
 	public static final String SESSION_ID = "sessionUniqueId";
 	
+	
+	public static final String SHA256 = "SHA-256";
+	public static final String HEX_B_FMT = "%02x";
+	
 	public static final String ALPH_NMR_STR = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"+"abcdefghijklmnopqrstuvwxyz"+"#$%&*"+"1234567890";
 	
 	
