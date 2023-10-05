@@ -17,6 +17,7 @@ public class CommonConstant {
 	public static final String SCRIPT_USER = "SCRIPT_USER";
 	public static final String AUTH_TKN_KEY = "authToken";
 	public static final String SESSION_ID = "sessionUniqueId";
+	public static final Integer REC_PER_PG = 25;
 	
 	
 	public static final String SHA256 = "SHA-256";
@@ -27,7 +28,7 @@ public class CommonConstant {
 	
 	
 	//pagination 
-	public static final Integer showRecord = 25;
+	public static final int showRecord = 25;
 	
 	
 	

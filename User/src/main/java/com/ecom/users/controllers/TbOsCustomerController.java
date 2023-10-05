@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ecom.users.models.TbOsCustomerModel;
 import com.ecom.users.services.TbOsCustomerService;
+import com.onlineShop.example.commonModel.ServiceOperationResult;
+import com.onlineShop.example.commonUtilMethods.FilterParameter;
 import com.onlineShop.example.exception.BusinessException;
 import com.onlineShop.example.exception.DatabaseException;
 
@@ -36,28 +38,36 @@ public class TbOsCustomerController {
 	
 	// get all user
 	@RequestMapping(value = "/getAllCustomers", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<TbOsCustomerModel>> getAllCustomers()
+	public ServiceOperationResult<List<TbOsCustomerModel>> getAllCustomers(@RequestBody FilterParameter filter)
 	{
-		List<TbOsCustomerModel> result = new ArrayList<TbOsCustomerModel>();
+		ServiceOperationResult<List<TbOsCustomerModel>> result = new ServiceOperationResult<List<TbOsCustomerModel>>();
 		
-		result = tbOsCustomerService.getAllCustomer();
-		
-		return ResponseEntity.status(HttpStatus.FOUND).body(result);
+		try
+		{
+			result = tbOsCustomerService.getAllCustomer(filter);
+			
+		}
+		catch(DatabaseException e)
+		{
+			throw new BusinessException(e);
+		}
+		return result;
 	}
 	
 	
 	// add or Update user
 	@RequestMapping(value = "/addOrUpdateUser", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public TbOsCustomerModel addorUpdateUser(@RequestBody TbOsCustomerModel model)
+	public ServiceOperationResult<TbOsCustomerModel> addorUpdateUser(@RequestBody TbOsCustomerModel model) throws Exception
 	{
-		TbOsCustomerModel result =null;
+		ServiceOperationResult<TbOsCustomerModel> result = new ServiceOperationResult<>();
 		try
 		{
 			result = tbOsCustomerService.addOrUpdateUser(model);
 		}
-		catch(Exception e)
+		catch(DatabaseException e)
 		{
-			System.out.println("Exception occre inside Add or Updare User Controller : "+e);
+			throw new BusinessException(e);
+			
 		}
 		return result;
 	}
@@ -65,9 +75,9 @@ public class TbOsCustomerController {
 	
 	// User Soft Delete
 	@RequestMapping(value = "/userSoftDelete", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public TbOsCustomerModel softDeletUser(TbOsCustomerModel model)
+	public ServiceOperationResult<TbOsCustomerModel> softDeletUser(TbOsCustomerModel model)
 	{
-		TbOsCustomerModel result = null;
+		ServiceOperationResult<TbOsCustomerModel> result = new ServiceOperationResult<TbOsCustomerModel>();
 		try
 		{
 			result = tbOsCustomerService.softDleteUser(model);
