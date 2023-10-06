@@ -126,7 +126,7 @@ public class TbOsCustomerService {
 		
 		//pagination
 		Integer showRecordOnOnePage = filter.getRecordToShowOnOnePage() != null ? filter.getRecordToShowOnOnePage()
-				: CommonConstant.showRecord;
+				: CommonConstant.REC_PER_PG;
 		Integer from = filter.getPageIndex();
 		Integer to = showRecordOnOnePage;
 		Long totalRecord = filter.getRecordTotal();

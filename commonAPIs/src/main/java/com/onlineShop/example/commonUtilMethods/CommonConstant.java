@@ -27,8 +27,7 @@ public class CommonConstant {
 	
 	
 	
-	//pagination 
-	public static final int showRecord = 25;
+	
 	
 	
 	

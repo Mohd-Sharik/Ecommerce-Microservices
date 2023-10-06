@@ -25,6 +25,7 @@ public class FilterParameter {
 		private @QueryParam("dsplNm") String dsplNm = "";
 		private @QueryParam("ldapAuth") String ldapAuth = "";
 		private @QueryParam("contactNumber") String contactNumber ="";
+		private @QueryParam("price") String price = "";
 
 		private @QueryParam("dsplTyp") String dsplTyp;
 		private @QueryParam("usrState") String usrState = "";
@@ -62,6 +63,7 @@ public class FilterParameter {
 		private @QueryParam("host") String host = "";
 		private @QueryParam("sprCapLn") String sprCapLn = "";
 		private @QueryParam("sysNm") String sysNm = "";
+		private @QueryParam("brandName") String brandName = "";
 
 		// not a query parameter but general use
 		private List<String> list = new ArrayList<>();
@@ -391,8 +393,22 @@ public class FilterParameter {
 		public void setContactNumber(String contactNumber) {
 			this.contactNumber = contactNumber;
 		}
+		public String getBrandName() {
+			return brandName;
+		}
+		public void setBrandName(String brandName) {
+			this.brandName = brandName;
+		}
+		public String getPrice() {
+			return price;
+		}
+		public void setPrice(String price) {
+			this.price = price;
+		}
 
 
+		
+		
 		
 		
 		

@@ -16,8 +16,11 @@
 	<description>this project used for Products Activities</description>
 	<properties>
 		<java.version>1.8</java.version>
+		<API-shopCommon-version>0.0.1-SNAPSHOT</API-shopCommon-version>
 		<spring-cloud.version>2021.0.8</spring-cloud.version>
 	</properties>
+
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -32,7 +35,11 @@
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
 		</dependency>
 
-
+		<dependency>
+			<groupId>Online-API</groupId>
+			<artifactId>shopCommon</artifactId>
+			<version>${API-shopCommon-version}</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
