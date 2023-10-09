@@ -27,6 +27,12 @@ public class TbOsPaymentsPersistance {
 		return tbOsPaymentsDao.findById(id);
 	}
 	
+	//find by order id
+	public Optional<TbOsPaymentsEntity> findByOrderId(Long orderId)
+	{
+		return tbOsPaymentsDao.findByOrderId(orderId);
+	}
+	
 	//save
 	@Transactional
 	public TbOsPaymentsEntity save(TbOsPaymentsEntity entity)

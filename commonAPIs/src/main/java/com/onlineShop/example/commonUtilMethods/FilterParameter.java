@@ -26,6 +26,10 @@ public class FilterParameter {
 		private @QueryParam("ldapAuth") String ldapAuth = "";
 		private @QueryParam("contactNumber") String contactNumber ="";
 		private @QueryParam("price") String price = "";
+		private @QueryParam("orderId") String orderId = "";
+		private @QueryParam("paymentMode") String paymentMode = "";
+		private @QueryParam("referenceNumber") String referenceNumber ="";
+		private @QueryParam("paymentStatus") String paymentStatus = "";
 
 		private @QueryParam("dsplTyp") String dsplTyp;
 		private @QueryParam("usrState") String usrState = "";
@@ -405,8 +409,33 @@ public class FilterParameter {
 		public void setPrice(String price) {
 			this.price = price;
 		}
+		public String getOrderId() {
+			return orderId;
+		}
+		public void setOrderId(String orderId) {
+			this.orderId = orderId;
+		}
+		public String getPaymentMode() {
+			return paymentMode;
+		}
+		public void setPaymentMode(String paymentMode) {
+			this.paymentMode = paymentMode;
+		}
+		public String getReferenceNumber() {
+			return referenceNumber;
+		}
+		public void setReferenceNumber(String referenceNumber) {
+			this.referenceNumber = referenceNumber;
+		}
+		public String getPaymentStatus() {
+			return paymentStatus;
+		}
+		public void setPaymentStatus(String paymentStatus) {
+			this.paymentStatus = paymentStatus;
+		}
 
 
+		
 		
 		
 		
