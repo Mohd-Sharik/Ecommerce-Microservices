@@ -1,10 +1,10 @@
-package com.ecom.payments;
+package com.ecom.pament;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class PaymentsApplicationTests {
+class PaymentApplicationTests {
 
 	@Test
 	void contextLoads() {

@@ -1,6 +1,7 @@
-package com.ecom.payments.services;
+package com.ecom.pament.services;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -10,9 +11,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import com.ecom.payments.entities.TbOsPaymentsEntity;
-import com.ecom.payments.models.TbOSPaymentsModel;
-import com.ecom.payments.persistance.TbOsPaymentsPersistance;
+import com.ecom.pament.entities.TbOsPaymentEntity;
+import com.ecom.pament.models.TbOSPaymentModel;
+import com.ecom.pament.persistance.TbOsPaymentPersistance;
+//import com.ecom.payments.entities.TbOsPaymentsEntity;
+//import com.ecom.payments.models.TbOSPaymentsModel;
 import com.onlineShop.example.commonModel.DatabaseOperationResult;
 import com.onlineShop.example.commonModel.PaginationAttribute;
 import com.onlineShop.example.commonModel.ServiceOperationResult;
@@ -25,26 +28,60 @@ import com.onlineShop.example.commonUtilMethods.SearchOperation;
 import com.onlineShop.example.exception.BusinessException;
 import com.onlineShop.example.exception.DatabaseException;
 
+
 @Service
-public class TbOsPamentsService {
+public class TbOsPaymentService {
 	
 	
 	@Autowired
-	private TbOsPaymentsPersistance tbOsPaymentsPersistance;
+	TbOsPaymentPersistance tbOsPaymentPersistance;
 	
 	
-	
-	public ServiceOperationResult<List<TbOSPaymentsModel>> getAll(FilterParameter filter)
+
+	// do payment
+	public ServiceOperationResult<TbOSPaymentModel> doPayment(TbOSPaymentModel model)
 	{
-		ServiceOperationResult<List<TbOSPaymentsModel>> response = new ServiceOperationResult<List<TbOSPaymentsModel>>();
+		ServiceOperationResult<TbOSPaymentModel> response = new ServiceOperationResult<TbOSPaymentModel>();
 		
 		try
 		{
-			DatabaseOperationResult<List<TbOsPaymentsEntity>> dbOpList = getpamentDatafromDb(filter);
-			List<TbOSPaymentsModel> list  = new ArrayList<TbOSPaymentsModel>();
-			for(TbOsPaymentsEntity entity : dbOpList.getModelOrEntity())
+			TbOsPaymentEntity entity = new TbOsPaymentEntity();
+			
+			entity.setId(null);
+			entity.setOrderId(model.getOrderId() != null ? model.getOrderId() : null);
+			entity.setPaymentMode(model.getPaymentMode() != null ? model.getPaymentMode() : null);
+			entity.setReferenceNumber(model.getReferenceNumber() != null ? model.getReferenceNumber() : null); 
+			entity.setPaymentStatus(model.getPaymentStatus() != null ? model.getPaymentStatus() : null);
+			entity.setAmont(model.getAmont() != null ? model.getAmont() : null);
+			entity.setCrtTs(new Date());
+			entity.setCrtBy(CommonConstant.SCRIPT_USER);
+			
+			tbOsPaymentPersistance.save(entity);
+			response.setResponse(model);
+			
+		}
+		catch(DatabaseException ex)
+		{
+			throw new BusinessException(ex);
+		}
+		return response;
+	}
+	
+	
+	
+	
+	//get All
+	public ServiceOperationResult<List<TbOSPaymentModel>> getAll(FilterParameter filter)
+	{
+		ServiceOperationResult<List<TbOSPaymentModel>> response = new ServiceOperationResult<List<TbOSPaymentModel>>();
+		
+		try
+		{
+			DatabaseOperationResult<List<TbOsPaymentEntity>> dbOpList = getpamentDatafromDb(filter);
+			List<TbOSPaymentModel> list  = new ArrayList<TbOSPaymentModel>();
+			for(TbOsPaymentEntity entity : dbOpList.getModelOrEntity())
 			{
-				TbOSPaymentsModel model = new TbOSPaymentsModel();
+				TbOSPaymentModel model = new TbOSPaymentModel();
 				
 				model.setId(entity.getId());
 				model.setOrderId(entity.getOrderId());
@@ -71,10 +108,10 @@ public class TbOsPamentsService {
 	}
 	
 	//getPaymentDataFromDb
-	public DatabaseOperationResult<List<TbOsPaymentsEntity>> getpamentDatafromDb(FilterParameter filter)
+	public DatabaseOperationResult<List<TbOsPaymentEntity>> getpamentDatafromDb(FilterParameter filter)
 	{
-		DatabaseOperationResult<List<TbOsPaymentsEntity>> dbopList = new DatabaseOperationResult<List<TbOsPaymentsEntity>>();
-		List<TbOsPaymentsEntity> modelOrEntity = new ArrayList<TbOsPaymentsEntity>();
+		DatabaseOperationResult<List<TbOsPaymentEntity>> dbopList = new DatabaseOperationResult<List<TbOsPaymentEntity>>();
+		List<TbOsPaymentEntity> modelOrEntity = new ArrayList<TbOsPaymentEntity>();
 		
 		//pagination
 		Integer showRecordOnOnePage = filter.getRecordToShowOnOnePage() == null ? CommonConstant.REC_PER_PG : filter.getRecordToShowOnOnePage();
@@ -85,10 +122,11 @@ public class TbOsPamentsService {
 		// use filters for find the result
 		 
 		String id = filter.getId();
-		String orderId = filter.getOrderId();
+		
 		String mode = filter.getPaymentMode();
 		String refNum = filter.getReferenceNumber();
 		String PStatus = filter.getPaymentStatus();
+		//String orderId = filter.getOrderId();
 		
 		
 		List<SearchCriteria> list = new ArrayList<SearchCriteria>();
@@ -98,10 +136,10 @@ public class TbOsPamentsService {
 			list.add(new SearchCriteria("id", id, SearchOperation.EQUAL));
 		}
 		
-		if(StringUtils.isNoneBlank(orderId))
-		{
-			list.add(new SearchCriteria(orderId, orderId, SearchOperation.MATCH));
-		}
+//		if(StringUtils.isNoneBlank(orderId))
+//		{
+//			list.add(new SearchCriteria("orderId", orderId, SearchOperation.MATCH));
+//		}
 		
 		if(StringUtils.isNoneBlank(mode))
 		{
@@ -119,17 +157,17 @@ public class TbOsPamentsService {
 		}
 		
 		
-		FilterUtil<TbOsPaymentsEntity> filterUtil = new FilterUtil<>();
+		FilterUtil<TbOsPaymentEntity> filterUtil = new FilterUtil<>();
 		if(totalReccord == null)
 		{
-			totalReccord = tbOsPaymentsPersistance.count(filterUtil.getSpecification(list));
+			totalReccord = tbOsPaymentPersistance.count(filterUtil.getSpecification(list));
 		}
 		
 		if(from != null && to != null)
 		{
 			Pageable page = PageRequest.of(from, to,Sort.by(Sort.Direction.DESC, "id"));
 			
-			modelOrEntity = tbOsPaymentsPersistance.findAll(filterUtil.getSpecification(list), page);
+			modelOrEntity = tbOsPaymentPersistance.findAll(filterUtil.getSpecification(list), page);
 			
 		}
 		
@@ -140,10 +178,10 @@ public class TbOsPamentsService {
 		pagAttr.setShowRecordOnOnePage(showRecordOnOnePage);
 		pagAttr.setFetchrecords(modelOrEntity.size());
 		pagAttr.setTotalPages((int)Math.ceil(totalReccord.intValue() * 1.0 / showRecordOnOnePage));
-		
-		dbopList.setPageAttribute(pagAttr);
+		dbopList.setModelOrEntity(modelOrEntity);
 		
 		return dbopList;
 	}
+
 
 }

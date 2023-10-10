@@ -1,4 +1,4 @@
-package com.ecom.payments.entities;
+package com.ecom.pament.entities;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -14,15 +14,17 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "TB_OS_PAYMENTS")
-public class TbOsPaymentsEntity implements Serializable{
+public class TbOsPaymentEntity implements Serializable{
+	
+	
+	
+	
 
 	/**
-	 *  @author Mohd Sharik
+	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
-	
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_OS_PAYMENTS_GEN")
 	@SequenceGenerator(name = "SEQ_OS_PAYMENTS_GEN", sequenceName = "SEQ_OS_PAYMENTS", allocationSize = 1)
@@ -117,8 +119,7 @@ public class TbOsPaymentsEntity implements Serializable{
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
-	
+
 	
 	
 	
