@@ -29,10 +29,10 @@ public class TbOsPaymentPersistance {
 		}
 		
 		//find by order id
-//		public Optional<TbOsPaymentEntity> findByOrderId(Long orderId)
-//		{
-//			return tbOsPaymentDao.findByOrderId(orderId);
-//		}
+		public Optional<TbOsPaymentEntity> findByOrderId(Long orderId)
+		{
+			return tbOsPaymentDao.findByOrderId(orderId);
+		}
 		
 		//save
 		@Transactional

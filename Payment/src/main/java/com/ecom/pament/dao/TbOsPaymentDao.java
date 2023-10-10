@@ -13,5 +13,5 @@ public interface TbOsPaymentDao extends JpaSpecificationExecutor<TbOsPaymentEnti
 
 	
 	
-	//Optional<TbOsPaymentEntity> findByOrderId(Long orderId);
+	Optional<TbOsPaymentEntity> findByOrderId(Long orderId);
 }

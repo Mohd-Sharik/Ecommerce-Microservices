@@ -3,6 +3,7 @@ package com.ecom.pament.services;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import com.ecom.pament.persistance.TbOsPaymentPersistance;
 //import com.ecom.payments.entities.TbOsPaymentsEntity;
 //import com.ecom.payments.models.TbOSPaymentsModel;
 import com.onlineShop.example.commonModel.DatabaseOperationResult;
+import com.onlineShop.example.commonModel.ErrorParameter;
 import com.onlineShop.example.commonModel.PaginationAttribute;
 import com.onlineShop.example.commonModel.ServiceOperationResult;
 import com.onlineShop.example.commonUtilMethods.CommonConstant;
@@ -38,6 +40,49 @@ public class TbOsPaymentService {
 	
 	
 
+	//find by orderId
+	public ServiceOperationResult<TbOSPaymentModel> findByOrderId(TbOSPaymentModel model)
+	{
+		ServiceOperationResult<TbOSPaymentModel> response = new ServiceOperationResult<TbOSPaymentModel>();
+		try
+		{
+			Long id = model.getOrderId();
+			if(id == null)
+			{
+				ErrorParameter err = new ErrorParameter();
+				err.setErrCode("404");
+				err.setErrDesc("orderId must no be null :");
+				response.setErrParam(err);
+				response.setSucces(false);
+				return response;
+			}
+			
+			Optional<TbOsPaymentEntity> ent = tbOsPaymentPersistance.findByOrderId(id);
+			if(ent.isPresent())
+			{
+				TbOsPaymentEntity entity = ent.get();
+				
+				model.setId(model.getId() != null ? model.getId() : entity.getId());
+				model.setOrderId(model.getOrderId() != null ? model.getOrderId() : entity.getOrderId());
+				model.setPaymentMode(model.getPaymentMode() != null ? model.getPaymentMode() : entity.getPaymentMode());
+				model.setReferenceNumber(model.getReferenceNumber() != null ? model.getReferenceNumber() : entity.getReferenceNumber());
+				model.setPaymentStatus(model.getPaymentStatus() != null ? model.getPaymentStatus() : entity.getPaymentStatus());
+				model.setAmont(model.getAmont() != null ? model.getAmont() : entity.getAmont());
+				model.setCrtTs(model.getCrtTs() != null ? model.getCrtTs() : entity.getCrtTs());
+				model.setCrtBy(model.getCrtBy() != null ? model.getCrtBy() : entity.getCrtBy());
+				
+			}
+			
+			response.setResponse(model);
+		}
+		catch(DatabaseException ex)
+		{
+			throw new BusinessException(ex);
+		}
+		return response;
+	}
+	
+	
 	// do payment
 	public ServiceOperationResult<TbOSPaymentModel> doPayment(TbOSPaymentModel model)
 	{

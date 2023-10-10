@@ -18,13 +18,32 @@ import com.onlineShop.example.exception.BusinessException;
 import com.onlineShop.example.exception.DatabaseException;
 
 @RestController
-@RequestMapping("/pament")
+@RequestMapping("/payment")
 public class TbOsPaymentController {
 	
 	
 	@Autowired
 	TbOsPaymentService tbOsPaymentService;
+
 	
+	
+	
+	
+	//get by order-Id
+	@RequestMapping(value = "/orderId", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ServiceOperationResult<TbOSPaymentModel> getByOrderId(@RequestBody TbOSPaymentModel model)
+	{
+		ServiceOperationResult<TbOSPaymentModel> result = new ServiceOperationResult<TbOSPaymentModel>();
+		try
+		{
+			result = tbOsPaymentService.findByOrderId(model);
+		}
+		catch(DatabaseException ex)
+		{
+			throw new BusinessException(ex);
+		}
+		return result;
+	}
 
 	//do Payment
 	@RequestMapping(value = "/doPayment", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
